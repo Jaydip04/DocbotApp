@@ -18,7 +18,6 @@
         android:textColor="@color/primary_dark"
         android:layout_marginBottom="16dp" />
 
-
     <TextView
         android:id="@+id/tv_serial_number"
         android:layout_width="match_parent"
@@ -37,11 +36,41 @@
         android:textColor="@color/primary_dark"
         android:layout_marginBottom="16dp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Device Status: Connected"
+        android:textSize="16sp"
+        android:textColor="#4CAF50"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Click 'Show Details' to view complete device information or 'Continue' to proceed with tests"
+        android:textSize="14sp"
+        android:textColor="@color/primary_dark"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/btn_show_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Details"
+        android:backgroundTint="@color/primary_dark"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
+
     <Button
         android:id="@+id/btn_continue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continue"
-        android:backgroundTint="@color/primary_dark"
-        android:textColor="#FFFFFF" />
+        android:text="Continue to Tests"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:padding="12dp" />
 </LinearLayout>
