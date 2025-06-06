@@ -87,13 +87,10 @@ dependencies {
     implementation("com.google.android.material:material:1.6.0")
     implementation("org.apache.commons:commons-compress:1.16.1")
     implementation("com.itextpdf:itextpdf:5.5.4")
-
     implementation("com.google.code.findbugs:jsr305:3.0.2")
     implementation("com.google.errorprone:error_prone_annotations:2.3.4")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
-
     implementation("com.google.auto.value:auto-value-annotations:1.9")
-
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
