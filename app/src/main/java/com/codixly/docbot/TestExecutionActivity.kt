@@ -143,12 +143,15 @@ class TestExecutionActivity : AppCompatActivity(),
                 btnStartTest.isEnabled = true
                 Toast.makeText(this, "Device authentication successful", Toast.LENGTH_SHORT).show()
             }
+
             Status.BLUETOOTH_NOT_CONNECTED -> {
                 showError("Bluetooth not connected. Please check connection.")
             }
+
             Status.INVALID_KEY -> {
                 showError("Invalid authentication key. Please verify credentials.")
             }
+
             else -> {
                 showError("Authentication failed. Please try again.")
             }
@@ -176,7 +179,8 @@ class TestExecutionActivity : AppCompatActivity(),
         try {
             executeTestByType()
         } catch (e: Exception) {
-            Toast.makeText(this, "Error starting test: $testType - ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error starting test: $testType - ${e.message}", Toast.LENGTH_LONG)
+                .show()
             handleStartResult("FAILED", "Test Initialization")
             showErrorDialog("Failed to start test: ${e.message}")
         }
@@ -262,7 +266,8 @@ class TestExecutionActivity : AppCompatActivity(),
                 handleStartResult("FAILED", "Thermometer Pairing")
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "Temperature pairing error: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Temperature pairing error: ${e.message}", Toast.LENGTH_LONG)
+                .show()
             handleStartResult("FAILED", "Temperature Setup")
         }
     }
@@ -274,7 +279,8 @@ class TestExecutionActivity : AppCompatActivity(),
                     val tempResult = EzdxBT.startTemperature()
                     handleStartResult(tempResult.toString(), "Weight/Temperature")
                 } catch (e: Exception) {
-                    Toast.makeText(this, "Temperature start error: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Temperature start error: ${e.message}", Toast.LENGTH_LONG)
+                        .show()
                     handleStartResult("FAILED", "Temperature Start")
                 }
             }
@@ -368,95 +374,277 @@ class TestExecutionActivity : AppCompatActivity(),
         }, 5000)
     }
 
+    //    private fun startHeightTest() {
+//        updateStatus("Preparing Height Measurement...", StatusType.INFO)
+//        Toast.makeText(this, "Please step onto the height scale and remain still.", Toast.LENGTH_LONG).show()
+//
+//        testHandler.postDelayed({
+//            try {
+//                val application = applicationContext as? Application
+//                if (application == null) {
+//                    val error = "Application context is null"
+//                    Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+//                    handleStartResult("FAILED", "Height Initialization")
+//                    showErrorDialog(error)
+//                    return@postDelayed
+//                }
+//
+//                val result = EzdxBT.startDigitalHeightScale(
+//                    authKey,
+//                    this,
+//                    this,
+//                    TestExecutionActivity::class.java,
+//                    application
+//                )
+//
+//                if (result.toString() == "SUCCESS") {
+//                    updateStatus("Height measurement started. Please stand still.", StatusType.SUCCESS)
+//                    handleStartResult(result.toString(), "Height Measurement")
+//                } else {
+//                    val errorMessage = "Failed to start Height test: $result"
+//                    Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+//                    handleStartResult("FAILED", "Height Initialization")
+//                    showErrorDialog(errorMessage)
+//                }
+//            } catch (e: Exception) {
+//                val errorMessage = "Exception during height test start: ${e.message}"
+//                Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+//                handleStartResult("FAILED", "Height Exception")
+//                showErrorDialog(errorMessage)
+//            }
+//        }, 4000) // let the UI and machine settle
+//    }
+    // above code of jaydeep
+
+// this code is worked
+//    private fun startHeightTest() {
+//        val tag = "HeightTest"
+//        val preparingMsg = "Preparing Height Measurement..."
+//        Log.d(tag, preparingMsg)
+//        updateStatus(preparingMsg, StatusType.INFO)
+//        Toast.makeText(this, "Preparing Height Measurement...", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(
+//            this,
+//            "Please step onto the height scale and remain still.",
+//            Toast.LENGTH_LONG
+//        ).show()
+//
+//        if (authKey.isEmpty()) {
+//            Toast.makeText(this, "Authentication key is invalid.", Toast.LENGTH_LONG).show()
+//            return
+//        }
+//
+//        testHandler.postDelayed({
+//            try {
+//                val application = this.application
+//                if (application == null) {
+//                    val error = "Application context is null"
+//                    Log.e(tag, error)
+//                    Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+//                    handleStartResult("FAILED", "Height Initialization")
+//                    showErrorDialog(error)
+//                    return@postDelayed
+//                }
+//
+//                Log.d(tag, "Starting digital height scale...")
+//                Toast.makeText(this, "Starting digital height scale...", Toast.LENGTH_SHORT).show()
+//                val result = EzdxBT.startDigitalHeightScale(
+//                    authKey,
+//                    this, // EzdxDataListener
+//                    this,
+//                    TestExecutionActivity::class.java,
+//                    application
+//                )
+//
+//                if (result.toString() == "SUCCESS") {
+//                    val successMsg = "Height measurement started. Please stand still."
+//                    Log.d(tag, successMsg)
+//                    updateStatus(successMsg, StatusType.SUCCESS)
+//                    Toast.makeText(this, successMsg, Toast.LENGTH_SHORT).show()
+//                    handleStartResult(result.toString(), "Height Measurement")
+//                } else {
+//                    val errorMessage = "Failed to start Height test: $result"
+//                    Log.e(tag, errorMessage)
+//                    Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+//                    handleStartResult("FAILED", "Height Initialization")
+//                    showErrorDialog(errorMessage)
+//                }
+//            } catch (e: Exception) {
+//                val errorMessage = "Exception during height test start: ${e.message}"
+//                Log.e(tag, errorMessage)
+//                Log.e(tag, Log.getStackTraceString(e))
+//                Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+//                handleStartResult("FAILED", "Height Exception")
+//                showErrorDialog(errorMessage)
+//            }
+//        }, 4000) // let the UI and machine settle
+//    }
+
+    // this is send for the testing
+//    private fun startHeightTest() {
+//        val tag = "HeightTest"
+//        Log.d(tag, "Preparing Height Measurement...")
+//
+//        updateStatus("Preparing Height Measurement...", StatusType.INFO)
+//        Toast.makeText(this, "Preparing Height Measurement...", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "Please step onto the height scale and remain still.", Toast.LENGTH_LONG).show()
+//
+//        if (authKey.isEmpty()) {
+//            Toast.makeText(this, "Authentication key is invalid.", Toast.LENGTH_LONG).show()
+//            return
+//        }
+//
+//
+//        // Delay start for better device readiness
+//        testHandler.postDelayed({
+//            try {
+//                val application = this.application ?: run {
+//                    val error = "Application context is null"
+//                    Log.e(tag, error)
+//                    Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+//                    handleStartResult("FAILED", "Height Initialization")
+//                    showErrorDialog(error)
+//                    return@postDelayed
+//                }
+//
+//                Log.d(tag, "Starting digital height scale...")
+//                Toast.makeText(this, "Starting digital height scale...", Toast.LENGTH_SHORT).show()
+//
+//                val result = EzdxBT.startDigitalHeightScale(
+//                    authKey,
+//                    this, // EzdxDataListener
+//                    this,
+//                    TestExecutionActivity::class.java,
+//                    application
+//                )
+//
+//                if (result.toString().equals("SUCCESS", ignoreCase = true)) {
+//                    val msg = "Height measurement started. Please stand still."
+//                    Log.d(tag, msg)
+//                    updateStatus(msg, StatusType.SUCCESS)
+//                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+//                    handleStartResult(result.toString(), "Height Measurement")
+//                } else {
+//                    val error = "Failed to start Height test: $result"
+//                    Log.e(tag, error)
+//                    Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+//                    handleStartResult("FAILED", "Height Initialization")
+//                    showErrorDialog("Please ensure the device is ready and try again.")
+//                }
+//            } catch (e: Exception) {
+//                val error = "Exception during height test start: ${e.message}"
+//                Log.e(tag, error)
+//                Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+//                handleStartResult("FAILED", "Height Exception")
+//                showErrorDialog(error)
+//            }
+//        }, 6000) // Increased from 4000 to 6000 for more stability
+//    }
+//
+//
+//    private fun formatHeightResult(ezdxData: EzdxData): String = buildString {
+//        appendLine("=== Height Measurement ===")
+//        appendLine("Height: ${ezdxData.result1 ?: "N/A"} cm")
+//        if (ezdxData.result2 != null) appendLine("Height (ft): ${ezdxData.result2}")
+//        appendLine("Test Duration: ${getTestDuration()}")
+//        appendLine("Timestamp: ${getCurrentTimestamp()}")
+//    }
     private fun startHeightTest() {
-        updateStatus("Preparing Height Measurement...", StatusType.INFO)
+        val tag = "HeightTest"
+        val preparingMsg = "Preparing Height Measurement..."
+        Log.d(tag, preparingMsg)
+        updateStatus(preparingMsg, StatusType.INFO)
+        Toast.makeText(this, "Preparing Height Measurement...", Toast.LENGTH_SHORT).show()
         Toast.makeText(this, "Please step onto the height scale and remain still.", Toast.LENGTH_LONG).show()
+
+        if (authKey.isEmpty()) {
+            Toast.makeText(this, "Authentication key is invalid.", Toast.LENGTH_LONG).show()
+            return
+        }
 
         testHandler.postDelayed({
             try {
-                val application = applicationContext as? Application
+                val application = this.application
                 if (application == null) {
                     val error = "Application context is null"
+                    Log.e(tag, error)
                     Toast.makeText(this, error, Toast.LENGTH_LONG).show()
                     handleStartResult("FAILED", "Height Initialization")
                     showErrorDialog(error)
                     return@postDelayed
                 }
 
+                Log.d(tag, "Starting digital height scale...")
+                Toast.makeText(this, "Starting digital height scale...", Toast.LENGTH_SHORT).show()
                 val result = EzdxBT.startDigitalHeightScale(
                     authKey,
-                    this,
+                    this, // EzdxDataListener
                     this,
                     TestExecutionActivity::class.java,
                     application
                 )
 
                 if (result.toString() == "SUCCESS") {
-                    updateStatus("Height measurement started. Please stand still.", StatusType.SUCCESS)
+                    val successMsg = "Height measurement started. Please stand still."
+                    Log.d(tag, successMsg)
+                    updateStatus(successMsg, StatusType.SUCCESS)
+                    Toast.makeText(this, successMsg, Toast.LENGTH_SHORT).show()
                     handleStartResult(result.toString(), "Height Measurement")
                 } else {
-                    val errorMessage = "Failed to start Height test: $result"
-                    Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
-                    handleStartResult("FAILED", "Height Initialization")
-                    showErrorDialog(errorMessage)
+                    handleStartFailure(result.toString())
                 }
             } catch (e: Exception) {
                 val errorMessage = "Exception during height test start: ${e.message}"
+                Log.e(tag, errorMessage)
+                Log.e(tag, Log.getStackTraceString(e))
                 Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
                 handleStartResult("FAILED", "Height Exception")
                 showErrorDialog(errorMessage)
             }
-        }, 4000) // let the UI and machine settle
+        }, 6000) // let the UI and machine settle
     }
 
+    private fun handleStartFailure(result: String) {
+        val tag = "HeightTest"
+        val errorMessage = "Failed to start Height test: $result"
+        Log.e(tag, errorMessage)
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
 
-//    private fun startBCATest() {
-//        updateStatus("Starting body composition analysis...", StatusType.INFO)
-//
-//        val age = intent.getIntExtra("age", 25).toFloat()
-//        val height = intent.getIntExtra("height", 170).toFloat()
-//        val isFemale = intent.getBooleanExtra("is_female", false)
-//
-//        Toast.makeText(this, "BCA parameters - Age: $age, Height: $height, Female: $isFemale", Toast.LENGTH_SHORT).show()
-//
-//        val result = EzdxBT.startBCA(authKey, this, applicationContext as Application?, isFemale, age, height)
-//        handleStartResult(result.toString(), "Body Composition Analysis")
-//    }
+        // Retry logic
+        val retryCount = 1 // Number of retries
+        for (i in 1..retryCount) {
+            Log.d(tag, "Retrying to start height test... Attempt: $i")
+            val retryResult = EzdxBT.startDigitalHeightScale(
+                authKey,
+                this, // EzdxDataListener
+                this,
+                TestExecutionActivity::class.java,
+                this.application
+            )
 
-//    private fun startHeightTest() {
-//        updateStatus("Please step on height machine and remain still...", StatusType.INFO)
-//        Toast.makeText(this, "Step on the digital height scale now", Toast.LENGTH_LONG).show()
-//
-//        testHandler.postDelayed({
-//            try {
-//                val result = EzdxBT.startDigitalHeightScale(
-//                    authKey,
-//                    this,
-//                    this,
-//                    this::class.java,
-//                    applicationContext as Application?
-//                )
-//                handleStartResult(result.toString(), "Height Measurement")
-//            } catch (e: Exception) {
-//                Toast.makeText(this, "Error starting Height test: ${e.message}", Toast.LENGTH_LONG).show()
-//                handleStartResult("FAILED", "Height Initialization")
-//                showErrorDialog("Error starting Height test: ${e.message}")
-//            }
-//        }, 3000)
-//    }
+            if (retryResult.toString() == "SUCCESS") {
+                val successMsg = "Height measurement started on retry. Please stand still."
+                Log.d(tag, successMsg)
+                updateStatus(successMsg, StatusType.SUCCESS)
+                Toast.makeText(this, successMsg, Toast.LENGTH_SHORT).show()
+                handleStartResult(retryResult.toString(), "Height Measurement")
+                return
+            }
+        }
 
+        // If all retries fail
+        handleStartResult("FAILED", "Height Initialization")
+        showErrorDialog(errorMessage)
+    }
 
-//    private fun startHeightTest() {
-//        updateStatus("Starting height measurement...", StatusType.INFO)
-//        val result = EzdxBT.startDigitalHeightScale(
-//            authKey,
-//            this,
-//            this,
-//            this::class.java,
-//            applicationContext as Application?
-//        )
-//        handleStartResult(result.toString(), "Height Measurement")
-//    }
+    private fun formatHeightResult(ezdxData: EzdxData): String = buildString {
+        appendLine("=== Height Measurement ===")
+        appendLine("Height: ${ezdxData.result1 ?: "N/A"} cm")
+        if (ezdxData.result2 != null) appendLine("Height (ft): ${ezdxData.result2}")
+        appendLine("Test Duration: ${getTestDuration()}")
+        appendLine("Timestamp: ${getCurrentTimestamp()}")
+    }
+
 
     private fun handleStartResult(result: String, testName: String) {
         Toast.makeText(this, "Test start result for $testName: $result", Toast.LENGTH_SHORT).show()
@@ -510,7 +698,8 @@ class TestExecutionActivity : AppCompatActivity(),
                 else -> EzdxBT.stopCurrentTest()
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "Error stopping current test: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error stopping current test: ${e.message}", Toast.LENGTH_LONG)
+                .show()
         }
     }
 
@@ -522,45 +711,93 @@ class TestExecutionActivity : AppCompatActivity(),
         progressBar.isVisible = false
     }
 
-    override fun onEzdxData(ezdxData: EzdxData) {
-        val statusName = ezdxData.status?.name ?: "UNKNOWN"
-        Toast.makeText(this, "Received EzdxData - Status: $statusName, Result1: ${ezdxData.result1}, Result2: ${ezdxData.result2}, Result3: ${ezdxData.result3}", Toast.LENGTH_SHORT).show()
+    //    override fun onEzdxData(ezdxData: EzdxData) {
+//        val statusName = ezdxData.status?.name ?: "UNKNOWN"
+//        Toast.makeText(
+//            this,
+//            "Received EzdxData - Status: $statusName, Result1: ${ezdxData.result1}, Result2: ${ezdxData.result2}, Result3: ${ezdxData.result3}",
+//            Toast.LENGTH_SHORT
+//        ).show()
+//
+//        runOnUiThread {
+//            handleEzdxDataStatus(statusName, ezdxData)
+//        }
+//    }
+    override fun onEzdxData(ezdxData: EzdxData?) {
+        if (ezdxData == null) {
+            Toast.makeText(this, "EzdxData is null", Toast.LENGTH_SHORT).show()
+            Log.e("Ezdx", "EzdxData is null")
+            return
+        }
 
+        val statusName = ezdxData.status?.name ?: "UNKNOWN"
+        val result1 = ezdxData.result1 ?: "N/A"
+        val result2 = ezdxData.result2 ?: "N/A"
+        val result3 = ezdxData.result3 ?: "N/A"
+        val note = ezdxData.note ?: "No note"
+
+        // Show toast with data
+        Toast.makeText(
+            this,
+            "EzdxData ➤ Status: $statusName\nResult1: $result1\nResult2: $result2\nResult3: $result3",
+            Toast.LENGTH_LONG
+        ).show()
+
+        // Log details
+        Log.d("Ezdx", "Status: $statusName")
+        Log.d("Ezdx", "Result1: $result1")
+        Log.d("Ezdx", "Result2: $result2")
+        Log.d("Ezdx", "Result3: $result3")
+        Log.d("Ezdx", "Note: $note")
+
+        // Update UI or handle logic
         runOnUiThread {
             handleEzdxDataStatus(statusName, ezdxData)
         }
     }
 
+
     private fun handleEzdxDataStatus(statusName: String, ezdxData: EzdxData) {
         when (statusName) {
             "TEST_COMPLETED" -> {
-                Toast.makeText(this, "Test completed successfully for $testType", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Test completed successfully for $testType",
+                    Toast.LENGTH_SHORT
+                ).show()
                 val result = formatTestResult(ezdxData)
                 updateStatus("Test completed successfully", StatusType.SUCCESS)
                 showResults(result)
                 resetTestState()
                 stopCurrentTest()
             }
+
             "TEST_FAILED" -> {
                 val errorMsg = ezdxData.failedMsg ?: "Unknown error occurred"
-                Toast.makeText(this, "Test failed for $testType: $errorMsg", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Test failed for $testType: $errorMsg", Toast.LENGTH_LONG)
+                    .show()
                 updateStatus("Test failed: $errorMsg", StatusType.ERROR)
                 resetTestState()
                 stopCurrentTest()
                 showErrorDialog("Test failed: $errorMsg")
             }
+
             "TEST_IN_PROGRESS", "MEASURING", "PROCESSING", "CALIBRATING", "READING" -> {
                 val displayStatus = formatStatusMessage(statusName)
                 updateStatus(displayStatus, StatusType.INFO)
-                Toast.makeText(this, "Test status update: $displayStatus", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Test status update: $displayStatus", Toast.LENGTH_SHORT)
+                    .show()
             }
+
             "DEVICE_READY", "SENSOR_CONNECTED" -> {
                 updateStatus("Device ready for measurement", StatusType.SUCCESS)
             }
+
             "SENSOR_ERROR", "CONNECTION_ERROR" -> {
                 updateStatus("Sensor error - check connection", StatusType.ERROR)
                 resetTestState()
             }
+
             else -> {
                 val displayStatus = formatStatusMessage(statusName)
                 updateStatus(displayStatus, StatusType.INFO)
@@ -586,7 +823,8 @@ class TestExecutionActivity : AppCompatActivity(),
             clipboard.setPrimaryClip(clip)
             Toast.makeText(this, "Result copied to clipboard", Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
-            Toast.makeText(this, "Error copying to clipboard: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error copying to clipboard: ${e.message}", Toast.LENGTH_LONG)
+                .show()
         }
     }
 
@@ -643,13 +881,6 @@ class TestExecutionActivity : AppCompatActivity(),
         appendLine("Timestamp: ${getCurrentTimestamp()}")
     }
 
-    private fun formatHeightResult(ezdxData: EzdxData): String = buildString {
-        appendLine("=== Height Measurement ===")
-        appendLine("Height: ${ezdxData.result1 ?: "N/A"} cm")
-        if (ezdxData.result2 != null) appendLine("Height (ft): ${ezdxData.result2}")
-        appendLine("Test Duration: ${getTestDuration()}")
-        appendLine("Timestamp: ${getCurrentTimestamp()}")
-    }
 
     private fun formatGlucoseResult(ezdxData: EzdxData): String = buildString {
         appendLine("=== Blood Glucose Results ===")
@@ -794,13 +1025,16 @@ class TestExecutionActivity : AppCompatActivity(),
                 Toast.makeText(this, "Bluetooth connected", Toast.LENGTH_SHORT).show()
                 updateStatus("Device connected", StatusType.SUCCESS)
             }
+
             com.healthcubed.ezdxlib.bluetoothHandler.BluetoothStatus.CONNECTING -> {
                 updateStatus("Connecting to device...", StatusType.INFO)
             }
+
             com.healthcubed.ezdxlib.bluetoothHandler.BluetoothStatus.NONE -> {
                 Toast.makeText(this, "Bluetooth disconnected", Toast.LENGTH_LONG).show()
                 handleBluetoothDisconnection()
             }
+
             else -> {
                 Toast.makeText(this, "Bluetooth status: $status", Toast.LENGTH_SHORT).show()
             }
