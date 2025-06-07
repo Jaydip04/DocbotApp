@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select Test"
+            android:text="Select Medical Test"
             android:textSize="24sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -39,8 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Measures SPO2 and BPM levels. Place finger in probe when prompted."
+                    android:text="Measures blood oxygen saturation (SpO2) and heart rate (BPM). Place finger firmly on sensor when prompted."
                     android:textSize="14sp"
                     android:textColor="#666666"
                     android:layout_marginBottom="12dp" />
@@ -69,50 +69,11 @@
                     android:id="@+id/btn_pulse_oximetry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start Pulse Oximetry"
-                    android:backgroundTint="@color/primary_dark"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Weight/Temperature Test -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Weight / Temperature"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_dark"
-                    android:layout_marginBottom="8dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Measures weight (Kg) or temperature (°C). Requires Bluetooth pairing first."
-                    android:textSize="14sp"
-                    android:textColor="#666666"
-                    android:layout_marginBottom="12dp" />
-
-                <Button
-                    android:id="@+id/btn_weight_temperature"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Start Weight/Temperature"
-                    android:backgroundTint="#FF9800"
-                    android:textColor="#FFFFFF" />
+                    android:text="Start Pulse Oximetry Test"
+                    android:backgroundTint="#2196F3"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -121,8 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -132,49 +93,8 @@
 
                 <TextView
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Blood Pressure"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_dark"
-                    android:layout_marginBottom="8dp"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Measures Systolic and Diastolic blood pressure in mmHg."
-                    android:textSize="14sp"
-                    android:textColor="#666666"
-                    android:layout_marginBottom="12dp" />
-
-                <Button
-                    android:id="@+id/btn_blood_pressure"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Start Blood Pressure"
-                    android:backgroundTint="#E91E63"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Glucose Test -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Blood Glucose"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="@color/primary_dark"
@@ -183,18 +103,149 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Measures blood glucose levels in mg/dL. Requires test strip and blood sample."
+                    android:text="Measures systolic and diastolic blood pressure in mmHg. Attach cuff to upper arm and remain still during measurement."
                     android:textSize="14sp"
                     android:textColor="#666666"
                     android:layout_marginBottom="12dp" />
 
                 <Button
-                    android:id="@+id/btn_glucose_test"
+                    android:id="@+id/btn_blood_pressure"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start Glucose Test"
+                    android:text="Start Blood Pressure Test"
+                    android:backgroundTint="#E91E63"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Height Measurement Test -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Height Measurement"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_dark"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Measures body height in centimeters. Stand straight on the scale platform and remain still during measurement."
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="12dp" />
+
+                <Button
+                    android:id="@+id/btn_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Start Height Measurement"
+                    android:backgroundTint="#4CAF50"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Body Composition Analysis -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Body Composition Analysis"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_dark"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Analyzes body composition including weight, body fat percentage, muscle mass, and water content. Stand barefoot and hold handles."
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="12dp" />
+
+                <Button
+                    android:id="@+id/btn_bca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Start Body Composition Analysis"
+                    android:backgroundTint="#FF9800"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Body Temperature Test -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Body Temperature"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_dark"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Measures body temperature in Celsius. Requires Bluetooth pairing with thermometer device first."
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="12dp" />
+
+                <Button
+                    android:id="@+id/btn_temperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Start Temperature Test"
                     android:backgroundTint="#9C27B0"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:padding="12dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -206,7 +257,8 @@
             android:backgroundTint="#757575"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            android:padding="12dp" />
+            android:padding="14dp"
+            android:layout_marginTop="8dp" />
 
     </LinearLayout>
 </ScrollView>
