@@ -39,5 +39,7 @@
     <color name="button_secondary">#FF5722</color>
     <color name="button_secondary_pressed">#E64A19</color>
     <color name="button_disabled">#BDBDBD</color>
+    <color name="light_black">#424242</color>
+    <color name="dark_orange">#ff8f00</color>
 
 </resources>

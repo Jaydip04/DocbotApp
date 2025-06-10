@@ -27,6 +27,15 @@
         android:theme="@style/Theme.Docbot"
         tools:targetApi="31">
         <activity
+            android:name=".activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DeviceAddedSuccessfullyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BluetoothScanActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.PatientRegistrationFormActivity"
             android:exported="false" />
         <activity
