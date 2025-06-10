@@ -12,17 +12,17 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/patientsFragment"
-        android:name="com.codixly.docbot.fragment.HomeFragment"
+        android:name="com.codixly.docbot.fragment.PatientsFragment"
         android:label="fragment_patients"
         tools:layout="@layout/fragment_patients" />
     <fragment
         android:id="@+id/testFragment"
-        android:name="com.codixly.docbot.fragment.HomeFragment"
+        android:name="com.codixly.docbot.fragment.TestFragment"
         android:label="fragment_test"
         tools:layout="@layout/fragment_test" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.codixly.docbot.fragment.HomeFragment"
+        android:name="com.codixly.docbot.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 
