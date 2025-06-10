@@ -1,5 +1,6 @@
 package com.codixly.docbot.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,16 @@ class OnboardingScreenOneActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        binding.skipText.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
+            finish()
+        }
+
+        binding.nextButton.setOnClickListener {
+            startActivity(Intent(this, OnboardingScreenSecActivity::class.java))
+            finish()
         }
     }
 }
