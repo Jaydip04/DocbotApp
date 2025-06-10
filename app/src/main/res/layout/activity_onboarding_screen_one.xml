@@ -60,7 +60,8 @@
         <!-- Dots + Button Row -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
 
             <!-- Dots -->
             <LinearLayout
@@ -72,23 +73,24 @@
                 android:orientation="horizontal">
 
                 <View
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
+                    android:layout_width="13dp"
+                    android:layout_height="4dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/active_dot" />
 
                 <View
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
+                    android:layout_width="13dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/inactive_dot" />
             </LinearLayout>
 
             <!-- Forward Button -->
             <ImageView
                 android:id="@+id/next_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
                 android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
                 android:background="@drawable/circle_background"
                 android:contentDescription="Next"
                 android:padding="12dp"
@@ -96,5 +98,7 @@
                 android:src="@drawable/ic_arrow_forward"
                 app:tint="@color/white" />
         </RelativeLayout>
+
+
     </LinearLayout>
 </RelativeLayout>

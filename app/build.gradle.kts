@@ -101,7 +101,6 @@ dependencies {
     implementation ("com.github.elinkthings:AILinkSDKParsingLibraryAndroid:1.9.8")
     implementation ("com.google.android.material:material:1.11.0")
 
-// Jetpack Navigation Component (optional but recommended)
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
 }
