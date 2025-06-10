@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
@@ -12,11 +12,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
 
     <application
         android:allowBackup="true"
@@ -28,6 +26,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Docbot"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.PatientRegistrationFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OtpVerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PatientAuthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SuccessPairedDeviceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ShowScanDeviceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BluetoothScanScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OnboardingScreenThirActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OnboardingScreenSecActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OnboardingScreenOneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SplashScreenActivity"
+            android:exported="false" />
         <activity
             android:name=".TestExecutionActivity"
             android:exported="false" />
