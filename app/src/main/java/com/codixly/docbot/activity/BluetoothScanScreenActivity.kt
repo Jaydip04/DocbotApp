@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.codixly.docbot.BluetoothConnect
 import com.codixly.docbot.databinding.ActivityBluetoothScanScreenBinding
 
 class BluetoothScanScreenActivity : AppCompatActivity() {
@@ -29,7 +30,8 @@ class BluetoothScanScreenActivity : AppCompatActivity() {
 
         // Handle scan button click
         binding.scanButton.setOnClickListener {
-            val intent = Intent(this@BluetoothScanScreenActivity, DeviceAddedSuccessfullyActivity::class.java)
+//            val intent = Intent(this@BluetoothScanScreenActivity, DeviceAddedSuccessfullyActivity::class.java)
+            val intent = Intent(this@BluetoothScanScreenActivity, BluetoothConnect::class.java)
             startActivity(intent)
             finish() // Optional: close this activity
         }

@@ -496,9 +496,15 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.codixly.docbot.adapter.BluetoothDeviceAdapter
 import com.healthcubed.ezdxlib.bluetoothHandler.BluetoothService
 import com.healthcubed.ezdxlib.bluetoothHandler.BluetoothStatus
 import com.healthcubed.ezdxlib.bluetoothHandler.EzdxBT
@@ -516,10 +522,12 @@ class BluetoothConnect: AppCompatActivity(),
     private lateinit var progressBar: ProgressBar
     private lateinit var statusTextView: TextView
     private var isScanning = false
+    private lateinit var deviceRecyclerView: RecyclerView
+    private lateinit var deviceAdapter: BluetoothDeviceAdapter
 
     private val deviceList = ArrayList<BluetoothDevice>()
     private val deviceNames = ArrayList<String>()
-    private lateinit var deviceAdapter: ArrayAdapter<String>
+//    private lateinit var deviceAdapter: ArrayAdapter<String>
     private lateinit var bluetoothService: BluetoothService
 
     // Handler for delays
@@ -528,15 +536,20 @@ class BluetoothConnect: AppCompatActivity(),
     companion object {
         private const val PERMISSION_REQUEST_CODE = 123
         private const val REQUEST_ENABLE_BT = 124
-        private const val CONNECTION_DELAY_MS = 2000L // 2 seconds delay
-        private const val NAVIGATION_DELAY_MS = 1500L // 1.5 seconds delay before navigation
+        private const val CONNECTION_DELAY_MS = 2000L
+        private const val NAVIGATION_DELAY_MS = 1500L
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.statusBarColor = ContextCompat.getColor(this, R.color.primary_dark)
         setContentView(R.layout.activity_bluetooth_connect)
-
+        enableEdgeToEdge()
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         // Initialize EzdxBT
         EzdxBT.initialize(applicationContext)
         bluetoothService = BluetoothService.getDefaultInstance()
@@ -547,13 +560,20 @@ class BluetoothConnect: AppCompatActivity(),
     }
 
     private fun initializeViews() {
-        btnScan = findViewById(R.id.btn_scan)
-        deviceListView = findViewById(R.id.device_list)
+        btnScan = findViewById(R.id.buttonscan)
+//        deviceListView = findViewById(R.id.device_list)
         progressBar = findViewById(R.id.progress_bar)
         statusTextView = findViewById(R.id.status_text)
+        deviceRecyclerView = findViewById(R.id.device_recycler_view)
+        deviceAdapter = BluetoothDeviceAdapter(deviceList) { device ->
+            stopScan()
+            connectToDevice(device)
+        }
+        deviceRecyclerView.adapter = deviceAdapter
+        deviceRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        deviceAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, deviceNames)
-        deviceListView.adapter = deviceAdapter
+//        deviceAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, deviceNames)
+//        deviceListView.adapter = deviceAdapter
 
         // Initially hide progress bar
         progressBar.visibility = View.GONE
@@ -569,12 +589,12 @@ class BluetoothConnect: AppCompatActivity(),
             }
         }
 
-        deviceListView.setOnItemClickListener { _, _, position, _ ->
-            if (position < deviceList.size) {
-                stopScan()
-                connectToDevice(deviceList[position])
-            }
-        }
+//        deviceListView.setOnItemClickListener { _, _, position, _ ->
+//            if (position < deviceList.size) {
+//                stopScan()
+//                connectToDevice(deviceList[position])
+//            }
+//        }
     }
 
     override fun onResume() {

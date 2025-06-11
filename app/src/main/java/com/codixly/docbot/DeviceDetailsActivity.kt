@@ -97,10 +97,14 @@ package com.codixly.docbot
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class DeviceDetailsActivity : AppCompatActivity() {
 
@@ -144,9 +148,19 @@ class DeviceDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setContentView(R.layout.activity_device_details)
+
+        enableEdgeToEdge()
+
+        val mainView = findViewById<View>(R.id.main)
+        ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
         // Set status bar color
         window.statusBarColor = ContextCompat.getColor(this, R.color.primary_dark)
-        setContentView(R.layout.activity_device_details)
 
         // Initialize device data from intent
         initializeDeviceData()
@@ -191,9 +205,9 @@ class DeviceDetailsActivity : AppCompatActivity() {
         }
 
         // Setup back button if exists
-        findViewById<Button>(R.id.btn_back)?.setOnClickListener {
-            onBackPressed()
-        }
+//        findViewById<Button>(R.id.btn_back)?.setOnClickListener {
+//            onBackPressed()
+//        }
     }
 
     private fun showDeviceDetailsDialog() {
@@ -227,33 +241,28 @@ class DeviceDetailsActivity : AppCompatActivity() {
 
     private fun buildDeviceInfoString(): String {
         return buildString {
-            appendLine("═══════════════════════════════════")
-            appendLine("        DEVICE INTROSPECTION")
-            appendLine("═══════════════════════════════════")
+            appendLine("DEVICE INTROSPECTION")
             appendLine()
-            appendLine("HCDeviceData {")
-            appendLine("  serialNumber: ${deviceData.serialNumber}")
-            appendLine("  firmwareVersion: ${deviceData.firmwareVersion}")
+            appendLine("HCDeviceData")
+            appendLine("serialNumber: ${deviceData.serialNumber}")
+            appendLine("firmwareVersion: ${deviceData.firmwareVersion}")
             appendLine()
-            appendLine("  --- MODULE STATUS ---")
-            appendLine("  bloodPressureModule: ${deviceData.bloodPressureModule}")
-            appendLine("  cholesterolUricAcidModule: ${deviceData.cholesterolUricAcidModule}")
-            appendLine("  glucometerModule: ${deviceData.glucometerModule}")
-            appendLine("  hemoglobinModule: ${deviceData.hemoglobinModule}")
-            appendLine("  pulseOximetryModule: ${deviceData.pulseOximetryModule}")
-            appendLine("  rdtModule: ${deviceData.rdtModule}")
-            appendLine("  ecgModule: ${deviceData.ecgModule}")
+            appendLine("MODULE STATUS")
+            appendLine("bloodPressureModule: ${deviceData.bloodPressureModule}")
+            appendLine("cholesterolUricAcidModule: ${deviceData.cholesterolUricAcidModule}")
+            appendLine("glucometerModule: ${deviceData.glucometerModule}")
+            appendLine("hemoglobinModule: ${deviceData.hemoglobinModule}")
+            appendLine("pulseOximetryModule: ${deviceData.pulseOximetryModule}")
+            appendLine("rdtModule: ${deviceData.rdtModule}")
+            appendLine("ecgModule: ${deviceData.ecgModule}")
             appendLine()
-            appendLine("  --- SENSOR DATA ---")
-            appendLine("  temperature: ${deviceData.temperature}°C")
+            appendLine("SENSOR DATA")
+            appendLine("temperature: ${deviceData.temperature}°C")
             appendLine()
-            appendLine("  --- DEVICE CAPABILITIES ---")
-            appendLine("  Total Active Modules: ${getActiveModuleCount()}")
-            appendLine("  Device Status: ${getDeviceStatus()}")
-            appendLine("  Last Updated: ${getCurrentTimestamp()}")
-            appendLine("}")
-            appendLine()
-            appendLine("═══════════════════════════════════")
+            appendLine("DEVICE CAPABILITIES")
+            appendLine("Total Active Modules: ${getActiveModuleCount()}")
+            appendLine("Device Status: ${getDeviceStatus()}")
+            appendLine("Last Updated: ${getCurrentTimestamp()}")
         }
     }
 
