@@ -27,8 +27,17 @@
         android:theme="@style/Theme.Docbot"
         tools:targetApi="31">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.NotificationActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.DeviceAddedSuccessfullyActivity"
             android:exported="false" />
@@ -68,11 +77,13 @@
         <activity
             android:name=".activity.SplashScreenActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".TestExecutionActivity"
@@ -84,10 +95,8 @@
             android:name=".DeviceDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
+            android:name=".MainActivity_old"
+            android:exported="false"></activity>
         <activity
             android:name=".BluetoothConnect"
             android:exported="false" />

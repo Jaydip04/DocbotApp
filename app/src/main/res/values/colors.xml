@@ -41,5 +41,6 @@
     <color name="button_disabled">#BDBDBD</color>
     <color name="light_black">#424242</color>
     <color name="dark_orange">#ff8f00</color>
+    <color name="profile_color">#05B4AC</color>
 
 </resources>

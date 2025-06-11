@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notificationRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".activity.NotificationActivity">
+
+    <!-- Centered No Data Image -->
+    <ImageView
+        android:id="@+id/ivNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="249dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:src="@drawable/notification" />
+
+    <!-- Back Arrow Top-Start -->
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_gravity="start|top"
+        android:contentDescription="Back"
+        android:padding="4dp"
+        android:src="@drawable/arrow_back" />
+
+</FrameLayout>
