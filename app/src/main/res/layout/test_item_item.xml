@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/testCardView"
+        android:layout_width="100dp"
+        android:layout_height="98dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:strokeColor="@android:color/black"
+        app:strokeWidth="0.5dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <!-- Background circle with icon -->
+            <FrameLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/bg_testicon_circle"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/iconImageView"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_heart"
+                    app:tint="#00C9CB" />
+            </FrameLayout>
+
+            <!-- Label -->
+            <TextView
+                android:id="@+id/labelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blood Group"
+                android:padding="2dp"
+                android:textColor="#000000"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:gravity="center" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<com.google.android.material.card.MaterialCardView  xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="100dp"-->
+<!--    android:layout_height="98dp"-->
+<!--    android:layout_margin="8dp"-->
+<!--    app:cardCornerRadius="16dp"-->
+<!--    app:cardElevation="2dp"-->
+<!--    app:strokeColor="@android:color/black"-->
+<!--    app:strokeWidth="0.5dp"-->
+<!--    app:cardBackgroundColor="@android:color/white">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:gravity="center"-->
+<!--        android:padding="8dp">-->
+
+<!--        &lt;!&ndash; Background circle with icon &ndash;&gt;-->
+<!--        <FrameLayout-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_marginBottom="2dp"-->
+<!--            android:background="@drawable/bg_testicon_circle"-->
+<!--            android:layout_gravity="center">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/iconImageView"-->
+<!--                android:layout_width="32dp"-->
+<!--                android:layout_height="32dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@drawable/ic_heart"-->
+<!--                app:tint="#00C9CB" />-->
+<!--        </FrameLayout>-->
+
+<!--        &lt;!&ndash; Label &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/labelTextView"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Blood Group"-->
+<!--            android:padding="2dp"-->
+<!--            android:textColor="#000000"-->
+<!--            android:maxLines="2"-->
+<!--            android:ellipsize="end"-->
+<!--            android:textSize="12sp"-->
+<!--            android:gravity="center" />-->
+
+<!--    </LinearLayout>-->
+<!--</com.google.android.material.card.MaterialCardView >-->

@@ -142,5 +142,13 @@
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowTranslucentStatus">false</item>
     </style>
+    <style name="TopRoundedCardShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">40dp</item>
+        <item name="cornerSizeTopRight">40dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
 
 </resources>
