@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
+    android:background="#E0F6FB"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
@@ -36,8 +37,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="70dp"
-        app:elevation="10dp"
+        android:elevation="10dp"
+        app:backgroundTint="@color/white"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
         app:itemBackground="@color/white"
+        app:itemActiveIndicatorStyle="@color/white"
+        app:activeIndicatorLabelPadding="0dp"
         app:itemIconTint="@drawable/selector_bottom_navigation"
         app:itemRippleColor="@null"
         app:itemTextAppearanceActive="@style/CustomBottomNavTextAppearance"
