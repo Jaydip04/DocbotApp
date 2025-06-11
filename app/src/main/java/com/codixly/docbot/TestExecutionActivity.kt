@@ -10,13 +10,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.healthcubed.ezdxlib.bluetoothHandler.BluetoothService
 import com.healthcubed.ezdxlib.bluetoothHandler.EzdxBT
@@ -70,6 +74,14 @@ class TestExecutionActivity : AppCompatActivity(),
         window.statusBarColor = ContextCompat.getColor(this, R.color.primary_dark)
         setContentView(R.layout.activity_test_execution)
 
+        enableEdgeToEdge()
+
+        val mainView = findViewById<View>(R.id.main)
+        ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         testType = intent.getStringExtra("test_type") ?: "UNKNOWN"
         authKey = intent.getStringExtra("auth_key") ?: "default-key"
 
@@ -182,7 +194,7 @@ class TestExecutionActivity : AppCompatActivity(),
             Toast.makeText(this, "Error starting test: $testType - ${e.message}", Toast.LENGTH_LONG)
                 .show()
             handleStartResult("FAILED", "Test Initialization")
-            showErrorDialog("Failed to start test: ${e.message}")
+//            showErrorDialog("Failed to start test: ${e.message}")
         }
     }
 
@@ -503,7 +515,7 @@ class TestExecutionActivity : AppCompatActivity(),
                     Log.e(tag, error)
                     Toast.makeText(this, error, Toast.LENGTH_LONG).show()
                     handleStartResult("FAILED", "Height Initialization")
-                    showErrorDialog(error)
+//                    showErrorDialog(error)
                     return@postDelayed
                 }
 
@@ -529,14 +541,14 @@ class TestExecutionActivity : AppCompatActivity(),
                     Log.e(tag, error)
                     Toast.makeText(this, error, Toast.LENGTH_LONG).show()
                     handleStartResult("FAILED", "Height Initialization")
-                    showErrorDialog("Please ensure the device is ready and try again.")
+//                    showErrorDialog("Please ensure the device is ready and try again.")
                 }
             } catch (e: Exception) {
                 val error = "Exception during height test start: ${e.message}"
                 Log.e(tag, error)
                 Toast.makeText(this, error, Toast.LENGTH_LONG).show()
                 handleStartResult("FAILED", "Height Exception")
-                showErrorDialog(error)
+//                showErrorDialog(error)
             }
         }, 6000) // Increased from 4000 to 6000 for more stability
     }
@@ -638,7 +650,7 @@ class TestExecutionActivity : AppCompatActivity(),
 //    }
 
     private fun formatHeightResult(ezdxData: EzdxData): String = buildString {
-        appendLine("=== Height Measurement ===")
+        appendLine("Height Measurement")
         appendLine("Height: ${ezdxData.result1 ?: "N/A"} cm")
         if (ezdxData.result2 != null) appendLine("Height (ft): ${ezdxData.result2}")
         appendLine("Test Duration: ${getTestDuration()}")
@@ -657,7 +669,7 @@ class TestExecutionActivity : AppCompatActivity(),
                 Toast.makeText(this, "$testName failed to start: $result", Toast.LENGTH_LONG).show()
                 updateStatus("Failed to start $testName", StatusType.ERROR)
                 resetTestState()
-                showErrorDialog("Failed to start $testName test. Please check device connection and try again.")
+//                showErrorDialog("Failed to start $testName test. Please check device connection and try again.")
             }
         }
     }
@@ -668,7 +680,7 @@ class TestExecutionActivity : AppCompatActivity(),
             updateStatus("Test timeout - Please try again", StatusType.WARNING)
             resetTestState()
             stopCurrentTest()
-            showErrorDialog("Test took too long to complete. Please check device and try again.")
+//            showErrorDialog("Test took too long to complete. Please check device and try again.")
         }
     }
 
@@ -779,7 +791,7 @@ class TestExecutionActivity : AppCompatActivity(),
                 updateStatus("Test failed: $errorMsg", StatusType.ERROR)
                 resetTestState()
                 stopCurrentTest()
-                showErrorDialog("Test failed: $errorMsg")
+//                showErrorDialog("Test failed: $errorMsg")
             }
 
             "TEST_IN_PROGRESS", "MEASURING", "PROCESSING", "CALIBRATING", "READING" -> {
@@ -841,7 +853,7 @@ class TestExecutionActivity : AppCompatActivity(),
     }
 
     private fun formatPulseOximetryResult(ezdxData: EzdxData): String = buildString {
-        appendLine("=== Pulse Oximetry Results ===")
+        appendLine("Pulse Oximetry Results")
         appendLine("SpO2: ${ezdxData.result1 ?: "N/A"}%")
         appendLine("Heart Rate: ${ezdxData.result2 ?: "N/A"} BPM")
         if (ezdxData.result3 != null) appendLine("PI: ${ezdxData.result3}")
@@ -851,7 +863,7 @@ class TestExecutionActivity : AppCompatActivity(),
     }
 
     private fun formatBloodPressureResult(ezdxData: EzdxData): String = buildString {
-        appendLine("=== Blood Pressure Results ===")
+        appendLine("Blood Pressure Results")
         appendLine("Systolic: ${ezdxData.result1 ?: "N/A"} mmHg")
         appendLine("Diastolic: ${ezdxData.result2 ?: "N/A"} mmHg")
         appendLine("Pulse: ${ezdxData.result3 ?: "N/A"} BPM")
@@ -861,7 +873,7 @@ class TestExecutionActivity : AppCompatActivity(),
     }
 
     private fun formatTemperatureResult(ezdxData: EzdxData): String = buildString {
-        appendLine("=== Weight/Temperature Results ===")
+        appendLine("Weight/Temperature Results")
         appendLine("Temperature: ${ezdxData.result1 ?: "N/A"}°C")
         appendLine("Weight: ${ezdxData.result2 ?: "N/A"} kg")
         if (ezdxData.result3 != null) appendLine("BMI: ${ezdxData.result3}")
@@ -871,7 +883,7 @@ class TestExecutionActivity : AppCompatActivity(),
     }
 
     private fun formatBCAResult(ezdxData: EzdxData): String = buildString {
-        appendLine("=== Body Composition Analysis ===")
+        appendLine("Body Composition Analysis")
         appendLine("Weight: ${ezdxData.result1 ?: "N/A"} kg")
         appendLine("Body Fat: ${ezdxData.result2 ?: "N/A"}%")
         appendLine("Muscle Mass: ${ezdxData.result3 ?: "N/A"} kg")
@@ -883,7 +895,7 @@ class TestExecutionActivity : AppCompatActivity(),
 
 
     private fun formatGlucoseResult(ezdxData: EzdxData): String = buildString {
-        appendLine("=== Blood Glucose Results ===")
+        appendLine("Blood Glucose Results")
         appendLine("Glucose Level: ${ezdxData.result1 ?: "N/A"} mg/dL")
         if (ezdxData.result2 != null) appendLine("Alternative Unit: ${ezdxData.result2} mmol/L")
         appendLine("Test Duration: ${getTestDuration()}")
@@ -892,7 +904,7 @@ class TestExecutionActivity : AppCompatActivity(),
     }
 
     private fun formatGenericResult(ezdxData: EzdxData): String = buildString {
-        appendLine("=== Test Results ===")
+        appendLine("Test Results")
         appendLine("Primary Result: ${ezdxData.result1 ?: "N/A"}")
         if (ezdxData.result2 != null) appendLine("Secondary Result: ${ezdxData.result2}")
         if (ezdxData.result3 != null) appendLine("Additional Data: ${ezdxData.result3}")
@@ -915,7 +927,7 @@ class TestExecutionActivity : AppCompatActivity(),
             cardResults.isVisible = true
             tvResults.isVisible = true
 
-            showResultDialog(result)
+//            showResultDialog(result)
         }
     }
 
@@ -956,24 +968,24 @@ class TestExecutionActivity : AppCompatActivity(),
 
     private fun showError(message: String) {
         updateStatus(message, StatusType.ERROR)
-        showErrorDialog(message)
+//        showErrorDialog(message)
     }
 
-    private fun showErrorDialog(message: String) {
-        AlertDialog.Builder(this)
-            .setTitle("Error - ${getTestTitle(testType)}")
-            .setMessage(message)
-            .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .setNeutralButton("Retry") { _, _ ->
-                authenticateDevice()
-            }
-            .setNegativeButton("Help") { _, _ ->
-                showTroubleshootingDialog()
-            }
-            .show()
-    }
+//    private fun showErrorDialog(message: String) {
+//        AlertDialog.Builder(this)
+//            .setTitle("Error - ${getTestTitle(testType)}")
+//            .setMessage(message)
+//            .setPositiveButton("OK") { dialog, _ ->
+//                dialog.dismiss()
+//            }
+//            .setNeutralButton("Retry") { _, _ ->
+//                authenticateDevice()
+//            }
+//            .setNegativeButton("Help") { _, _ ->
+//                showTroubleshootingDialog()
+//            }
+//            .show()
+//    }
 
     private fun showTroubleshootingDialog() {
         val troubleshootingText = getTroubleshootingText(testType)
@@ -1045,7 +1057,7 @@ class TestExecutionActivity : AppCompatActivity(),
         if (isTestRunning) {
             updateStatus("Device disconnected during test", StatusType.ERROR)
             resetTestState()
-            showErrorDialog("Device disconnected. Please reconnect and try again.")
+//            showErrorDialog("Device disconnected. Please reconnect and try again.")
         } else {
             updateStatus("Device disconnected", StatusType.WARNING)
         }

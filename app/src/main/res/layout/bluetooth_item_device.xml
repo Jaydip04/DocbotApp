@@ -1,15 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- Use the layout you provided earlier, just ensure proper IDs -->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="2dp"
-    app:cardBackgroundColor="@android:color/white"
-    app:cardPreventCornerOverlap="false"
-    app:cardUseCompatPadding="true">
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,16 +15,13 @@
         android:gravity="center_vertical"
         android:background="@drawable/border_teal">
 
-        <!-- Device Icon -->
         <ImageView
+            android:id="@+id/device_icon"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/ic_device"
-            android:layout_marginEnd="12dp"
-            android:tint="#018786"
-            tools:ignore="UseAppTint" />
+            android:layout_marginEnd="12dp" />
 
-        <!-- Device Info -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,6 +29,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/device_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Device Name"
@@ -44,6 +38,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/device_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1.9 Meter"
@@ -51,7 +46,6 @@
                 android:textSize="13sp" />
         </LinearLayout>
 
-        <!-- Clock Icon and Time -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,26 +54,113 @@
             android:layout_marginEnd="8dp">
 
             <ImageView
+                android:id="@+id/clock_icon"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/ic_clock"
-                android:layout_marginEnd="4dp"
-                app:tint="#6277F0" />
+                android:layout_marginEnd="4dp" />
 
             <TextView
+                android:id="@+id/device_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5min Ago"
+                android:text="Now"
                 android:textSize="12sp"
                 android:textColor="#6277F0" />
         </LinearLayout>
 
-        <!-- Bluetooth Icon -->
         <ImageView
+            android:id="@+id/bluetooth_icon"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_bluetooth"
-            app:tint="#018786" />
+            android:src="@drawable/ic_bluetooth" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_margin="8dp"-->
+<!--    app:cardCornerRadius="12dp"-->
+<!--    app:cardElevation="2dp"-->
+<!--    app:cardBackgroundColor="@android:color/white"-->
+<!--    app:cardPreventCornerOverlap="false"-->
+<!--    app:cardUseCompatPadding="true">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="12dp"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:background="@drawable/border_teal">-->
+
+<!--        &lt;!&ndash; Device Icon &ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:layout_width="32dp"-->
+<!--            android:layout_height="32dp"-->
+<!--            android:src="@drawable/ic_device"-->
+<!--            android:layout_marginEnd="12dp"-->
+<!--            android:tint="#018786"-->
+<!--            tools:ignore="UseAppTint" />-->
+
+<!--        &lt;!&ndash; Device Info &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/device_name"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Device Name"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textSize="14sp" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="1.9 Meter"-->
+<!--                android:textColor="#555555"-->
+<!--                android:textSize="13sp" />-->
+<!--        </LinearLayout>-->
+
+<!--        &lt;!&ndash; Clock Icon and Time &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:layout_marginEnd="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="16dp"-->
+<!--                android:layout_height="16dp"-->
+<!--                android:src="@drawable/ic_clock"-->
+<!--                android:layout_marginEnd="4dp"-->
+<!--                app:tint="#6277F0" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="5min Ago"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="#6277F0" />-->
+<!--        </LinearLayout>-->
+
+<!--        &lt;!&ndash; Bluetooth Icon &ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:src="@drawable/ic_bluetooth"-->
+<!--            app:tint="#018786" />-->
+<!--    </LinearLayout>-->
+
+<!--</androidx.cardview.widget.CardView>-->
