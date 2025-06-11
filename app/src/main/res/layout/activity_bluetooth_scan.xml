@@ -48,9 +48,11 @@
 
         <!-- Scan Button -->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/scan_button"
+            android:id="@+id/buttonscan"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:layout_marginHorizontal="55dp"
+            android:layout_marginBottom="53dp"
             android:layout_below="@id/bluetooth_container"
             android:layout_marginTop="24dp"
             android:background="@drawable/rounded_button_white"
