@@ -30,11 +30,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Welcome!"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#000"
                 android:layout_marginLeft="34dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="90dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ruchita"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textColor="#333"
                 app:layout_constraintTop_toBottomOf="@id/welcomeText"
                 app:layout_constraintStart_toStartOf="@id/welcomeText" />
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="How is it going today?"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="#888"
                 app:layout_constraintTop_toBottomOf="@id/userName"
                 app:layout_constraintStart_toStartOf="@id/userName" />
@@ -63,38 +63,39 @@
                 android:id="@+id/topIcons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/notification"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_notification"
-                    android:layout_margin="4dp" />
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/notification" />
 
                 <ImageView
                     android:id="@+id/monitoring"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_monitoring"
-                    android:layout_margin="4dp" />
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/device_info" />
 
                 <ImageView
                     android:id="@+id/profileImage"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    android:src="@drawable/ic_profile"
                     android:layout_margin="4dp"
+                    android:background="@drawable/circle_white"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle_white" />
+                    android:src="@drawable/ic_profile" />
             </LinearLayout>
 
             <!-- Doctor image at bottom right -->
             <ImageView
                 android:id="@+id/doctorImage"
-                android:layout_width="160dp"
+                android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_doctor"
@@ -124,47 +125,33 @@
             <LinearLayout
                 android:id="@+id/addPatientCard"
                 android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="82dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/rounded_bg_patient_card"
                 android:elevation="2dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="12dp"
+                android:paddingTop="7dp"
+                android:paddingStart="9dp"
+                android:paddingBottom="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <FrameLayout
-                    android:layout_width="70dp"
-                    android:layout_height="68dp"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/circle_teal">
-
-                    <ImageView
-                        android:layout_width="37dp"
-                        android:layout_height="37dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_user"
-                        app:tint="#FFFFFF" />
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="bottom|end"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/circle_white"
-                        android:src="@drawable/ic_add"
-                        app:tint="#02B3B7" />
-                </FrameLayout>
+                <ImageView
+                    android:layout_width="78dp"
+                    android:layout_height="73dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/add_user_button" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add New Patient"
-                    android:textColor="#333333"
+                    android:textColor="#99221F1F"
+                    android:layout_marginStart="18dp"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -173,48 +160,34 @@
             <LinearLayout
                 android:id="@+id/takeTestCard"
                 android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_height="82dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/rounded_bg_patient_card"
                 android:elevation="2dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="12dp"
+                android:paddingTop="7dp"
+                android:paddingStart="9dp"
+                android:paddingBottom="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addPatientCard">
 
-                <FrameLayout
-                    android:layout_width="70dp"
-                    android:layout_height="68dp"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/circle_teal">
-
-                    <ImageView
-                        android:layout_width="37dp"
-                        android:layout_height="37dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_test"
-                        app:tint="#FFFFFF" />
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="bottom|end"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/circle_white"
-                        android:src="@drawable/ic_add"
-                        app:tint="#02B3B7" />
-                </FrameLayout>
+                <ImageView
+                    android:layout_width="78dp"
+                    android:layout_height="73dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/add_test_button" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Take a test"
-                    android:textColor="#333333"
+                    android:layout_marginStart="18dp"
+                    android:textColor="#99221F1F"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
