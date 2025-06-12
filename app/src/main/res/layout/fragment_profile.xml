@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -21,7 +21,6 @@
             android:id="@+id/profileImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/circle_background"
             android:src="@drawable/doctor" />
 
         <TextView
@@ -61,7 +60,7 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="Total Patient"
-                android:textColor="#7ACDCB"
+                android:textColor="@color/primary"
                 android:textSize="12sp" />
 
             <TextView
@@ -69,8 +68,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="2dp"
-                android:text="100"
-                android:textColor="#00B8D4"
+                android:text="0"
+                android:textColor="@color/primary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -78,7 +77,7 @@
         <View
             android:layout_width="1dp"
             android:layout_height="40dp"
-            android:background="#E0E0E0" />
+            android:background="@color/primary" />
 
         <!-- Total Tests -->
         <LinearLayout
@@ -99,7 +98,7 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="Total Test"
-                android:textColor="#7ACDCB"
+                android:textColor="@color/primary"
                 android:textSize="12sp" />
 
             <TextView
@@ -107,8 +106,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="2dp"
-                android:text="756"
-                android:textColor="#00B8D4"
+                android:text="0"
+                android:textColor="@color/primary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -122,6 +121,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/optionIcon"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="?android:attr/selectableItemBackground"
@@ -129,16 +129,13 @@
             android:focusable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="12dp"
             android:paddingEnd="12dp">
 
             <ImageView
-                android:id="@+id/optionIcon"
+
                 android:layout_width="43dp"
                 android:layout_height="43dp"
-                android:background="@drawable/profile_circle_background"
-                android:padding="6dp"
-                android:src="@drawable/ic_heart"
+                android:src="@drawable/my_account"
                 app:tint="@color/primary" />
 
             <TextView
@@ -148,13 +145,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:text="My Account"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/light_black"
+                android:textSize="16sp" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_arrow_next" />
         </LinearLayout>
 
@@ -165,6 +161,7 @@
             android:layout_marginBottom="8dp"
             android:background="#E0E0E0" />
         <LinearLayout
+            android:id="@+id/patitnesIcon"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="?android:attr/selectableItemBackground"
@@ -172,16 +169,13 @@
             android:focusable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="12dp"
             android:paddingEnd="12dp">
 
             <ImageView
-                android:id="@+id/patitnesIcon"
+
                 android:layout_width="43dp"
                 android:layout_height="43dp"
-                android:background="@drawable/profile_circle_background"
-                android:padding="6dp"
-                android:src="@drawable/ic_patients"
+                android:src="@drawable/patients"
                 app:tint="@color/primary" />
 
             <TextView
@@ -191,13 +185,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:text="Patients"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/light_black"
+                android:textSize="16sp" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_arrow_next" />
         </LinearLayout>
 
@@ -208,7 +201,7 @@
             android:layout_marginBottom="8dp"
             android:background="#E0E0E0" />
         <LinearLayout
-            android:id="@+id/report"
+            android:id="@+id/faqsIcon"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="?android:attr/selectableItemBackground"
@@ -216,59 +209,13 @@
             android:focusable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="12dp"
             android:paddingEnd="12dp">
 
             <ImageView
-                android:id="@+id/reportsIcon"
+
                 android:layout_width="43dp"
                 android:layout_height="43dp"
-                android:background="@drawable/profile_circle_background"
-                android:padding="6dp"
-                android:src="@drawable/ic_test"
-                app:tint="@color/primary" />
-
-            <TextView
-                android:id="@+id/reportsTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="Reports"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_next" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="#E0E0E0" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp">
-
-            <ImageView
-                android:id="@+id/faqsIcon"
-                android:layout_width="43dp"
-                android:layout_height="43dp"
-                android:background="@drawable/profile_circle_background"
-                android:padding="6dp"
-                android:src="@drawable/ic_chat"
+                android:src="@drawable/faq"
                 app:tint="@color/primary" />
 
             <TextView
@@ -278,13 +225,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:text="FAQs"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/light_black"
+                android:textSize="16sp"/>
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_arrow_next" />
         </LinearLayout>
 
@@ -295,6 +241,7 @@
             android:layout_marginBottom="8dp"
             android:background="#E0E0E0" />
         <LinearLayout
+            android:id="@+id/btnlogout"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="?android:attr/selectableItemBackground"
@@ -302,32 +249,27 @@
             android:focusable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="12dp"
             android:paddingEnd="12dp">
 
             <ImageView
                 android:id="@+id/logoutIcon"
                 android:layout_width="43dp"
                 android:layout_height="43dp"
-                android:background="@drawable/profile_circle_background"
-                android:padding="6dp"
-                android:src="@drawable/ic_logout"
+                android:src="@drawable/logout"
                 app:tint="@color/primary" />
 
             <TextView
-                android:id="@+id/btnlogout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:text="Logout"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/light_black"
+                android:textSize="16sp" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_arrow_next" />
         </LinearLayout>
 
@@ -337,6 +279,39 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="#E0E0E0" />
+
+        <LinearLayout
+            android:id="@+id/btnDeleteAccount"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingEnd="12dp">
+
+            <ImageView
+                android:id="@+id/delete_account"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:src="@drawable/delect_account"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="Delete Account"
+                android:textColor="@color/light_black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_arrow_next" />
+        </LinearLayout>
 
     </LinearLayout>
 
