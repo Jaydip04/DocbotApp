@@ -1,6 +1,7 @@
 package com.codixly.docbot
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -67,11 +68,13 @@ class TestSelectionActivity : AppCompatActivity() {
 
     private fun navigateToTest(testType: String) {
         Log.d(TAG, "Navigating to test: $testType")
+        val sharedPref = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val machineVerifyKey = sharedPref.getString("machine_verify_key", null)
 
         val intent = Intent(this, TestExecutionActivity::class.java).apply {
             // Primary test parameters
             putExtra("test_type", testType)
-            putExtra("auth_key", "VmtaYVUyRnJNVVpPVlZaV1YwZG9VRmxYZEVkTk1WSldWV3RLYTAxRVJrVlVWV2h2VkRKV2MySkVVbFZOUmtwaFZHdFZOVkpXUmxsYVJUVlRVbFZaZWc9PQ==")
+            putExtra("auth_key", machineVerifyKey)
 
             // Pass all device data to the test execution activity
             putExtra("serial_number", getIntent().getStringExtra("serial_number"))
