@@ -44,28 +44,39 @@
 
         <!-- Bluetooth Circle with Icon -->
         <FrameLayout
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center">
+            android:id="@+id/bluetooth_frame"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center">
 
-            <ImageView
-                android:id="@+id/rings"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_bluetooth_rings"
-                android:scaleType="fitCenter" />
+        <ImageView
+            android:id="@+id/rings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_bluetooth_rings"
+            android:scaleType="fitCenter" />
 
-            <ImageView
-                android:id="@+id/bluetooth_icon_bg"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:background="@drawable/circle_white"
-                android:padding="16dp"
-                android:src="@drawable/ic_bluetooth"
-                app:tint="#00B5C7" />
-        </FrameLayout>
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/bluetooth_icon_bg"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_white"
+            android:padding="16dp"
+            android:src="@drawable/ic_bluetooth"
+            app:tint="#00B5C7" />
+    </FrameLayout>
+
+    <!-- Scanning GIF -->
+    <ImageView
+        android:id="@+id/myGifView"
+        android:layout_gravity="center"
+        android:layout_width="205dp"
+        android:layout_height="205dp"
+        android:visibility="gone" /> <!-- Hide GIF initially -->
+
+
+</LinearLayout>
 
     <!-- Scan Button -->
     <androidx.appcompat.widget.AppCompatButton

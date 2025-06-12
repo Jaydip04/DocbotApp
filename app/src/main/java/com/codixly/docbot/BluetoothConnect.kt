@@ -487,6 +487,7 @@ import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -504,14 +505,21 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.codixly.docbot.adapter.BluetoothDeviceAdapter
+import com.codixly.docbot.model.VerifyKeyRequest
+import com.codixly.docbot.model.VerifyKeyResponse
+import com.codixly.docbot.network.ApiClient
 import com.healthcubed.ezdxlib.bluetoothHandler.BluetoothService
 import com.healthcubed.ezdxlib.bluetoothHandler.BluetoothStatus
 import com.healthcubed.ezdxlib.bluetoothHandler.EzdxBT
 import com.healthcubed.ezdxlib.model.EzdxData
 import com.healthcubed.ezdxlib.model.HCDeviceData
 import com.healthcubed.ezdxlib.model.Status
-import com.healthcubed.ezdxlib.model.TestName
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class BluetoothConnect: AppCompatActivity(),
     BluetoothService.OnBluetoothScanCallback,
@@ -524,11 +532,13 @@ class BluetoothConnect: AppCompatActivity(),
     private var isScanning = false
     private lateinit var deviceRecyclerView: RecyclerView
     private lateinit var deviceAdapter: BluetoothDeviceAdapter
-
+    private lateinit var imageView: ImageView
+    private lateinit var frameLayout: FrameLayout
     private val deviceList = ArrayList<BluetoothDevice>()
     private val deviceNames = ArrayList<String>()
 //    private lateinit var deviceAdapter: ArrayAdapter<String>
     private lateinit var bluetoothService: BluetoothService
+    private var pendingScanRequest = false
 
     // Handler for delays
     private val handler = Handler(Looper.getMainLooper())
@@ -561,10 +571,12 @@ class BluetoothConnect: AppCompatActivity(),
 
     private fun initializeViews() {
         btnScan = findViewById(R.id.buttonscan)
-//        deviceListView = findViewById(R.id.device_list)
         progressBar = findViewById(R.id.progress_bar)
         statusTextView = findViewById(R.id.status_text)
         deviceRecyclerView = findViewById(R.id.device_recycler_view)
+        imageView = findViewById(R.id.myGifView)
+        frameLayout = findViewById(R.id.bluetooth_frame)
+
         deviceAdapter = BluetoothDeviceAdapter(deviceList) { device ->
             stopScan()
             connectToDevice(device)
@@ -572,22 +584,42 @@ class BluetoothConnect: AppCompatActivity(),
         deviceRecyclerView.adapter = deviceAdapter
         deviceRecyclerView.layoutManager = LinearLayoutManager(this)
 
-//        deviceAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, deviceNames)
-//        deviceListView.adapter = deviceAdapter
-
-        // Initially hide progress bar
         progressBar.visibility = View.GONE
         statusTextView.text = "Ready to scan"
+
+        // Hide GIF initially
+        imageView.visibility = View.GONE
+        frameLayout.visibility = View.VISIBLE
     }
 
     private fun setupListeners() {
         btnScan.setOnClickListener {
-            if (isScanning) {
-                stopScan()
+            if (checkAndRequestPermissions()) {
+                if (isScanning) {
+                    stopScan()
+                } else {
+                    startScan()
+                    showScanGif()
+                }
             } else {
-                startScan()
+                pendingScanRequest = true // Remember user wanted to scan
             }
         }
+//        btnScan.setOnClickListener {
+//            if (isScanning) {
+//                stopScan()
+//            } else {
+//                startScan()
+//                // Show GIF and hide frame
+//                frameLayout.visibility = View.GONE
+//                imageView.visibility = View.VISIBLE
+//
+//                Glide.with(this)
+//                    .asGif()
+//                    .load(R.raw.scan_bluetooth_device)
+//                    .into(imageView)
+//            }
+//        }
 
 //        deviceListView.setOnItemClickListener { _, _, position, _ ->
 //            if (position < deviceList.size) {
@@ -605,10 +637,14 @@ class BluetoothConnect: AppCompatActivity(),
 
     override fun onPause() {
         super.onPause()
-        if (isScanning) {
-            stopScan()
-        }
+        if (isScanning) stopScan()
     }
+//    override fun onPause() {
+//        super.onPause()
+//        if (isScanning) {
+//            stopScan()
+//        }
+//    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -621,50 +657,90 @@ class BluetoothConnect: AppCompatActivity(),
         handler.removeCallbacksAndMessages(null)
     }
 
-    private fun checkAndRequestPermissions() {
+    private fun checkAndRequestPermissions(): Boolean {
         val permissions = mutableListOf<String>()
 
-        // Location permissions (required for BLE scanning)
+        // Add required permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
+            != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
         }
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
+            != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION)
         }
-
-        // Bluetooth permissions based on Android version
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN)
-                != PackageManager.PERMISSION_GRANTED
-            ) {
+                != PackageManager.PERMISSION_GRANTED) {
                 permissions.add(Manifest.permission.BLUETOOTH_SCAN)
             }
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
-                != PackageManager.PERMISSION_GRANTED
-            ) {
+                != PackageManager.PERMISSION_GRANTED) {
                 permissions.add(Manifest.permission.BLUETOOTH_CONNECT)
             }
         } else {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH)
-                != PackageManager.PERMISSION_GRANTED
-            ) {
+                != PackageManager.PERMISSION_GRANTED) {
                 permissions.add(Manifest.permission.BLUETOOTH)
             }
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADMIN)
-                != PackageManager.PERMISSION_GRANTED
-            ) {
+                != PackageManager.PERMISSION_GRANTED) {
                 permissions.add(Manifest.permission.BLUETOOTH_ADMIN)
             }
         }
 
-        if (permissions.isNotEmpty()) {
+        return if (permissions.isNotEmpty()) {
             ActivityCompat.requestPermissions(this, permissions.toTypedArray(), PERMISSION_REQUEST_CODE)
+            false
+        } else {
+            true
         }
     }
+
+//    private fun checkAndRequestPermissions() {
+//        val permissions = mutableListOf<String>()
+//
+//        // Location permissions (required for BLE scanning)
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+//            != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
+//        }
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+//            != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+//        }
+//
+//        // Bluetooth permissions based on Android version
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN)
+//                != PackageManager.PERMISSION_GRANTED
+//            ) {
+//                permissions.add(Manifest.permission.BLUETOOTH_SCAN)
+//            }
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
+//                != PackageManager.PERMISSION_GRANTED
+//            ) {
+//                permissions.add(Manifest.permission.BLUETOOTH_CONNECT)
+//            }
+//        } else {
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH)
+//                != PackageManager.PERMISSION_GRANTED
+//            ) {
+//                permissions.add(Manifest.permission.BLUETOOTH)
+//            }
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADMIN)
+//                != PackageManager.PERMISSION_GRANTED
+//            ) {
+//                permissions.add(Manifest.permission.BLUETOOTH_ADMIN)
+//            }
+//        }
+//
+//        if (permissions.isNotEmpty()) {
+//            ActivityCompat.requestPermissions(this, permissions.toTypedArray(), PERMISSION_REQUEST_CODE)
+//        }
+//    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -676,38 +752,112 @@ class BluetoothConnect: AppCompatActivity(),
             PERMISSION_REQUEST_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
                     Toast.makeText(this, "All permissions granted", Toast.LENGTH_SHORT).show()
+                    if (pendingScanRequest) {
+                        pendingScanRequest = false
+                        startScan()
+                        showScanGif()
+                    }
                 } else {
-                    Toast.makeText(this, "Some permissions were denied. Bluetooth functionality may be limited.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Some permissions denied", Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
 
+    private fun showScanGif() {
+        frameLayout.visibility = View.GONE
+        imageView.visibility = View.VISIBLE
+
+        Glide.with(this)
+            .asGif()
+            .load(R.raw.scan_bluetooth_device)
+            .into(imageView)
+    }
+
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        when (requestCode) {
+//            PERMISSION_REQUEST_CODE -> {
+//                if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+//                    Toast.makeText(this, "All permissions granted", Toast.LENGTH_SHORT).show()
+//                } else {
+//                    Toast.makeText(this, "Some permissions were denied. Bluetooth functionality may be limited.", Toast.LENGTH_LONG).show()
+//                }
+//            }
+//        }
+//    }
+
+//    private fun startScan() {
+//        val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+//
+//        // Check if Bluetooth is supported
+//        if (bluetoothAdapter == null) {
+//            showError("Bluetooth not supported on this device")
+//            return
+//        }
+//
+//        // Check if Bluetooth is enabled
+//        if (!bluetoothAdapter.isEnabled) {
+//            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
+//                    != PackageManager.PERMISSION_GRANTED
+//                ) {
+//                    showError("Bluetooth permission not granted")
+//                    return
+//                }
+//            }
+//            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
+//            return
+//        }
+//
+//        // Check scanning permissions
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN)
+//                != PackageManager.PERMISSION_GRANTED
+//            ) {
+//                showError("Bluetooth scan permission not granted")
+//                return
+//            }
+//        }
+//
+//        // Start scanning
+//        isScanning = true
+//        deviceList.clear()
+//        deviceNames.clear()
+//        deviceAdapter.notifyDataSetChanged()
+//
+//        btnScan.text = "Stop Scan"
+//        progressBar.visibility = View.VISIBLE
+//        statusTextView.text = "Scanning for devices..."
+//
+//        try {
+//            bluetoothService.startScan()
+//        } catch (e: Exception) {
+//            showError("Failed to start scan: ${e.message}")
+//            resetScanUI()
+//        }
+//    }
+
     private fun startScan() {
         val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
-        // Check if Bluetooth is supported
         if (bluetoothAdapter == null) {
             showError("Bluetooth not supported on this device")
             return
         }
 
-        // Check if Bluetooth is enabled
         if (!bluetoothAdapter.isEnabled) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
-                    != PackageManager.PERMISSION_GRANTED
-                ) {
-                    showError("Bluetooth permission not granted")
-                    return
-                }
-            }
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
             return
         }
 
-        // Check scanning permissions
+        // Required permissions
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN)
                 != PackageManager.PERMISSION_GRANTED
@@ -720,7 +870,6 @@ class BluetoothConnect: AppCompatActivity(),
         // Start scanning
         isScanning = true
         deviceList.clear()
-        deviceNames.clear()
         deviceAdapter.notifyDataSetChanged()
 
         btnScan.text = "Stop Scan"
@@ -749,6 +898,8 @@ class BluetoothConnect: AppCompatActivity(),
         btnScan.text = "Start Scan"
         progressBar.visibility = View.GONE
         statusTextView.text = if (deviceList.isEmpty()) "No devices found" else "Scan stopped"
+        imageView.visibility = View.GONE
+        frameLayout.visibility = View.VISIBLE
     }
 
     private fun connectToDevice(device: BluetoothDevice) {
@@ -780,12 +931,26 @@ class BluetoothConnect: AppCompatActivity(),
             REQUEST_ENABLE_BT -> {
                 if (resultCode == RESULT_OK) {
                     Toast.makeText(this, "Bluetooth enabled", Toast.LENGTH_SHORT).show()
+                    startScan()
                 } else {
                     showError("Bluetooth is required for device scanning")
                 }
             }
         }
     }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        when (requestCode) {
+//            REQUEST_ENABLE_BT -> {
+//                if (resultCode == RESULT_OK) {
+//                    Toast.makeText(this, "Bluetooth enabled", Toast.LENGTH_SHORT).show()
+//                } else {
+//                    showError("Bluetooth is required for device scanning")
+//                }
+//            }
+//        }
+//    }
 
     // Bluetooth scan callbacks
     override fun onDeviceDiscovered(device: BluetoothDevice, rssi: Int) {
@@ -846,13 +1011,44 @@ class BluetoothConnect: AppCompatActivity(),
             }
         }
     }
-
     private fun authenticateDevice() {
-        try {
-            statusTextView.text = "Authenticating device..."
-            EzdxBT.authenticate("VmtaYVUyRnJNVVpPVlZaV1YwZG9VRmxYZEVkTk1WSldWV3RLYTAxRVJrVlVWV2h2VkRKV2MySkVVbFZOUmtwaFZHdFZOVkpXUmxsYVJUVlRVbFZaZWc9PQ==")
-        } catch (e: Exception) {
-            showError("Authentication failed: ${e.message}")
+        val sharedPref = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val machineUniqueId = sharedPref.getString("machine_unique_id", null)
+
+        if (!machineUniqueId.isNullOrEmpty()) {
+            val request = VerifyKeyRequest(machine_unique_id = machineUniqueId)
+
+            ApiClient.instance.getVerifyKey(request).enqueue(object : Callback<VerifyKeyResponse> {
+                override fun onResponse(call: Call<VerifyKeyResponse>, response: Response<VerifyKeyResponse>) {
+                    if (response.isSuccessful && response.body()?.status == true) {
+                        val verifyKey = response.body()?.machine_verify_key
+
+                        with(sharedPref.edit()) {
+                            putString("machine_verify_key", verifyKey)
+                            apply()
+                        }
+
+                        try {
+                            statusTextView.text = "Authenticating device..."
+                            verifyKey?.let {
+                                EzdxBT.authenticate(it)
+                            } ?: run {
+                                showError("Verify key is null")
+                            }
+                        } catch (e: Exception) {
+                            showError("Authentication failed: ${e.message}")
+                        }
+                    } else {
+                        showError("Device authentication failed")
+                    }
+                }
+
+                override fun onFailure(call: Call<VerifyKeyResponse>, t: Throwable) {
+                    showError("API call failed: ${t.message}")
+                }
+            })
+        } else {
+            Toast.makeText(this, "Machine details is not found", Toast.LENGTH_SHORT).show()
         }
     }
 
