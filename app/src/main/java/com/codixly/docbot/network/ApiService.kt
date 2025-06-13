@@ -9,8 +9,12 @@ import com.codixly.docbot.model.LoginRequest
 import com.codixly.docbot.model.LoginResponse
 import com.codixly.docbot.model.LogoutRequest
 import com.codixly.docbot.model.LogoutResponse
+import com.codixly.docbot.model.SendOtpRequest
+import com.codixly.docbot.model.SendOtpResponse
 import com.codixly.docbot.model.VerifyKeyRequest
 import com.codixly.docbot.model.VerifyKeyResponse
+import com.codixly.docbot.model.VerifyOtpRequest
+import com.codixly.docbot.model.VerifyOtpResponse
 import com.codixly.docbot.model.VerifyTokenRequest
 import com.codixly.docbot.model.VerifyTokenResponse
 import retrofit2.Call
@@ -50,4 +54,11 @@ interface ApiService {
 
     @GET("getFaq")
     fun getFaqs(): Call<FaqResponse>
+
+    @POST("send_otp")
+    fun sendOtp(@Body request: SendOtpRequest): Call<SendOtpResponse>
+
+    @POST("verify_otp")
+    fun verifyOtp(@Body request: VerifyOtpRequest): Call<VerifyOtpResponse>
+
 }

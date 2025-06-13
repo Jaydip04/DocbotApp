@@ -10,73 +10,38 @@
     tools:context=".fragment.PatientsFragment">
 
     <LinearLayout
+        android:id="@+id/topIcons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:gravity="end"
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <!-- Profile icon with floating + -->
-
-
-        <!-- Spacer -->
-        <!-- Corrected Spacer -->
-        <!-- Optional: Match the height of the row -->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-
-        <!-- Notification Icon -->
         <ImageView
-            android:id="@+id/notification_button"
+            android:id="@+id/notification"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_notification" />
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/notification" />
 
-        <!-- ECG / Monitor Icon -->
         <ImageView
+            android:id="@+id/monitoring"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_monitoring" />
+            android:src="@drawable/device_info" />
+
     </LinearLayout>
 
     <View
         android:layout_width="0dp"
         android:layout_height="60dp" />
 
-    <FrameLayout
+    <ImageView
+        android:id="@+id/addPatients"
         android:layout_width="78dp"
         android:layout_height="73dp"
-        android:layout_gravity="center">
-
-        <!-- Background Rounded Square -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/circle_teal"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="37dp"
-                android:layout_height="37dp"
-                android:src="@drawable/ic_profile"
-                app:tint="@android:color/white" />
-        </LinearLayout>
-
-        <!-- Plus Icon floating at bottom-right -->
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="2dp"
-            android:background="@drawable/circle_white"
-            android:padding="2dp"
-            android:src="@drawable/ic_add" />
-    </FrameLayout>
+        android:layout_gravity="center"
+        android:src="@drawable/add_user_button" />
 
     <View
         android:layout_width="0dp"
@@ -95,7 +60,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-
             android:padding="16dp">
 
             <!-- Search Box -->
