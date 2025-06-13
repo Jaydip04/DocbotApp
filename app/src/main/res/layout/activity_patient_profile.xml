@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.PatientProfileActivity">
+
+
+
+        <LinearLayout
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="0dp">
+
+            <!-- Profile Image -->
+            <ImageView
+                android:layout_marginTop="24dp"
+                android:id="@+id/profileImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="12dp"
+                android:src="@drawable/doctor" />
+
+            <!-- Name -->
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kewin"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- ID -->
+            <TextView
+                android:id="@+id/userId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="ID : 45678"
+                android:textColor="#5ED2D2"
+                android:textSize="14sp" />
+
+            <!-- Card with Rounded Corners -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/top_rounded_gradient"
+                android:orientation="vertical"
+
+                android:padding="16dp">
+                <!-- New Test Button -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_button_outline"
+                    android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_plus"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="#E4D9D9"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Test"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Check Reports Button -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_button_outline">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_file"
+                        android:backgroundTint="#5ED2D2"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Check Reports"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <!-- Heart Rate Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/heartRateCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    app:cardBackgroundColor="#E4F8F7"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Heart rate"
+                                android:textColor="#000"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="97"
+                                android:textColor="#000"
+                                android:textSize="36sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="bpm"
+                                android:textColor="#000"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="69dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_heart_graph" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Blood Group & Weight Cards -->
+                <LinearLayout
+                    android:id="@+id/topTwoCards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    >
+
+                    <!-- Blood Group Card -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="#FFA8A8"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <ImageView
+
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+
+                                android:src="@drawable/ic_blood" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Blood Group"
+                                android:textColor="#000"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="A+"
+                                android:textColor="#000"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Weight Card -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="#FFF2D8"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/weight" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Weight"
+                                android:textColor="#000"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="103lbs"
+                                android:textColor="#000"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
