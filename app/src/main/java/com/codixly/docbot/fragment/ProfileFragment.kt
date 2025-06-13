@@ -17,8 +17,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.codixly.docbot.R
+import com.codixly.docbot.activity.DeviceInfoScreenActivity
 import com.codixly.docbot.activity.FaqActivity
 import com.codixly.docbot.activity.MyAccountActivity
+import com.codixly.docbot.activity.NotificationActivity
 import com.codixly.docbot.activity.OnboardingScreenOneActivity
 import com.codixly.docbot.activity.PatientReportsActivity
 import com.codixly.docbot.activity.SplashScreenActivity
@@ -78,9 +80,26 @@ class ProfileFragment : Fragment() {
             navigateToMyAccountActivityScreen()
         }
 
+        binding.notification.setOnClickListener {
+            navigateToNotificationActivity()
+        }
+        binding.monitoring.setOnClickListener {
+            navigateToDeviceActivity()
+        }
+
         setupLogoutButton()
         setupDeleteAccountButton()
 
+    }
+
+    private fun navigateToDeviceActivity() {
+        val intent = Intent(requireContext(), DeviceInfoScreenActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToNotificationActivity() {
+        val intent = Intent(requireContext(), NotificationActivity::class.java)
+        startActivity(intent)
     }
 
     private fun fetchCustomerData(customerId: String, token: String) {

@@ -65,7 +65,7 @@
         <EditText
             android:id="@+id/et_client_id"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_weight="1"
             android:background="@null"
             android:hint="Enter your client ID"
@@ -95,7 +95,7 @@
         <EditText
             android:id="@+id/et_password"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_weight="1"
             android:background="@null"
             android:hint="Enter your password"
