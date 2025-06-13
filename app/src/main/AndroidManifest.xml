@@ -28,13 +28,19 @@
         android:theme="@style/Theme.Docbot"
         tools:targetApi="31">
         <activity
-            android:name=".activity.MyAccountActivity"
+            android:name=".activity.HeightMeasureResultActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.FaqActivity"
+            android:name=".activity.HeightStatusSteponeActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.DeviceInfoScreenActivity"
+            android:name=".activity.HeightMeasureStepOneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.TermsConditionScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SelectedTestScreenActivity"
             android:exported="false" />
         <activity
             android:name=".activity.PatientReportsActivity"
@@ -44,14 +50,12 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.DeviceAddedSuccessfullyActivity"
@@ -91,12 +95,12 @@
             android:exported="false" />
         <activity
             android:name=".activity.SplashScreenActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".TestExecutionActivity"

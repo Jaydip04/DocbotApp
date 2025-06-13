@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:padding="16dp"
+
+        tools:context=".activity.HeightStatusSteponeActivity">
+
+        <!-- Top Bar -->
+        <LinearLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Back Arrow -->
+            <ImageView
+                android:id="@+id/backArrow"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/arrow_back"
+                android:contentDescription="Back" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Height"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="#000000" />
+
+            <!-- Spacer (no "Skip" text in this screen) -->
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+        </LinearLayout>
+
+        <!-- Spacer to push image to center vertically -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Centered Image -->
+        <ImageView
+            android:id="@+id/centerImage"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:src="@drawable/height_device"
+        android:contentDescription="Height Device" />
+
+        <!-- Spacer to push image to center vertically -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>

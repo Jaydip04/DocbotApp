@@ -1,26 +1,6 @@
-//package com.codixly.docbot.fragment
-//
-//import android.os.Bundle
-//import androidx.fragment.app.Fragment
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import com.codixly.docbot.R
-//
-//class TestFragment : Fragment() {
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_test, container, false)
-//    }
-//
-//
-//}
 package com.codixly.docbot.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,22 +12,27 @@ import com.codixly.docbot.databinding.FragmentTestBinding
 import com.codixly.docbot.model.TestItem
 import com.codixly.docbot.R
 import com.codixly.docbot.activity.GridSpacingItemDecoration
+import com.codixly.docbot.activity.NotificationActivity
 
 class TestFragment : Fragment() {
 
-    private var _binding: FragmentTestBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentTestBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTestBinding.inflate(inflater, container, false)
+        binding = FragmentTestBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.notification.setOnClickListener {
+            val intent = Intent(requireContext(), NotificationActivity::class.java)
+            startActivity(intent)
+        }
 
         // Dummy data
         val dummyList = listOf(
@@ -78,8 +63,5 @@ class TestFragment : Fragment() {
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }
