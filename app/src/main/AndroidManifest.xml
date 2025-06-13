@@ -28,6 +28,9 @@
         android:theme="@style/Theme.Docbot"
         tools:targetApi="31">
         <activity
+            android:name=".activity.PatientReportResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.HeightMeasureResultActivity"
             android:exported="false" />
         <activity
