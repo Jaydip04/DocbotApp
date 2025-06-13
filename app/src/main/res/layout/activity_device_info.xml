@@ -33,7 +33,7 @@
                     android:id="@+id/deviceIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_device"
+                    android:src="@drawable/device_info"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"

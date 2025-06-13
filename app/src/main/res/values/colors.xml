@@ -17,6 +17,7 @@
 
     <!-- If you don't have these primary colors, add them -->
     <color name="primary">#02B3B7</color>
+    <color name="primary2">#1A02B3B7</color>
     <color name="primary_dark">#303F9F</color>
     <color name="white">#FFFFFF</color>
 
@@ -43,5 +44,6 @@
     <color name="dark_orange">#ff8f00</color>
     <color name="profile_color">#05B4AC</color>
     <color name="colorSurfaceVariant">#E3F2FD</color>
+    <color name="dark_gray">#666666</color>
 
 </resources>

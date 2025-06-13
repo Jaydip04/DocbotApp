@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white"
+    tools:context=".activity.HeightMeasureStepOneActivity">
+
+    <!-- Top bar -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <!-- Back Arrow -->
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/arrow_back"
+            android:layout_gravity="center_vertical" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Height"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="#000000" />
+
+        <!-- Skip Text -->
+        <TextView
+            android:id="@+id/skipText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skip"
+            android:textColor="#A7A7A7"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Spacer to push image down -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Centered Instruction Image -->
+    <ImageView
+        android:id="@+id/instructionImage"
+        android:layout_width="match_parent"
+        android:layout_height="446dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/how_to_measure_height"
+        android:contentDescription="How to measure height" />
+
+    <!-- Spacer to push button up -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Floating Arrow Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_marginBottom="24dp">
+
+        <ImageView
+            android:id="@+id/nextButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="0dp"
+            android:src="@drawable/ic_arrow_forward"
+            android:background="@drawable/circle_background"
+            android:padding="16dp"
+            app:tint="@color/white" />
+    </LinearLayout>
+</LinearLayout>

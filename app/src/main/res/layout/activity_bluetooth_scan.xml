@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#02B3B7"
+    android:padding="24dp"
+    tools:context=".activity.BluetoothScanActivity">
+
+    <!-- Bluetooth concentric design with white center -->
+    <LinearLayout
+        android:id="@+id/bluetooth_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#02B3B7"
-        android:padding="24dp"
-        tools:context=".activity.BluetoothScanActivity">
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <!-- Bluetooth concentric design with white center -->
-        <LinearLayout
-            android:id="@+id/bluetooth_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true">
+        <!-- Bluetooth Circle with Icon -->
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center">
 
-            <!-- Bluetooth Circle with Icon -->
-            <FrameLayout
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center">
+            <!-- Outer concentric rings -->
+            <ImageView
+                android:id="@+id/rings"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_bluetooth_rings" />
 
-                <!-- Outer concentric rings -->
-                <ImageView
-                    android:id="@+id/rings"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_bluetooth_rings"
-                    android:scaleType="fitCenter" />
+            <!-- Center white circle -->
+            <ImageView
+                android:id="@+id/bluetooth_icon_bg"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circle_white"
+                android:padding="16dp"
+                android:src="@drawable/ic_bluetooth"
+                app:tint="#00B5C7" />
+        </FrameLayout>
+    </LinearLayout>
 
-                <!-- Center white circle -->
-                <ImageView
-                    android:id="@+id/bluetooth_icon_bg"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/circle_white"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_bluetooth"
-                    app:tint="#00B5C7" />
-            </FrameLayout>
-        </LinearLayout>
+    <!-- Scan Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonscan"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@id/bluetooth_container"
+        android:layout_marginHorizontal="55dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="53dp"
+        android:background="@drawable/rounded_button_white"
+        android:text="SCAN DEVICE"
+        android:textAllCaps="true"
+        android:textColor="#02B3B7"
+        android:textStyle="bold" />
 
-        <!-- Scan Button -->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonscan"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginHorizontal="55dp"
-            android:layout_marginBottom="53dp"
-            android:layout_below="@id/bluetooth_container"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/rounded_button_white"
-            android:text="SCAN DEVICE"
-            android:textAllCaps="true"
-            android:textColor="#02B3B7"
-            android:textStyle="bold" />
+    <!-- RecyclerView below Scan Button -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/device_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/buttonscan"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFFFFF"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        android:visibility="visible" />
 
-        <!-- RecyclerView below Scan Button -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/device_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/scan_button"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"
-            android:clipToPadding="false"
-            android:visibility="gone"
-            android:paddingBottom="16dp"
-            android:background="#FFFFFF"/>
-
-    </RelativeLayout>
+</RelativeLayout>

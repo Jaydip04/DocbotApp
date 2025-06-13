@@ -22,14 +22,14 @@
             android:id="@+id/notification"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_notification"
+            android:src="@drawable/notification_bell"
             android:layout_margin="4dp" />
 
         <ImageView
             android:id="@+id/monitoring"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_monitoring"
+            android:src="@drawable/device_info"
             android:layout_margin="4dp" />
 
         <ImageView
