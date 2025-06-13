@@ -11,6 +11,7 @@ import com.codixly.docbot.adapter.TestItemAdapter
 import com.codixly.docbot.databinding.FragmentTestBinding
 import com.codixly.docbot.model.TestItem
 import com.codixly.docbot.R
+import com.codixly.docbot.activity.DeviceInfoScreenActivity
 import com.codixly.docbot.activity.GridSpacingItemDecoration
 import com.codixly.docbot.activity.NotificationActivity
 
@@ -30,8 +31,10 @@ class TestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.notification.setOnClickListener {
-            val intent = Intent(requireContext(), NotificationActivity::class.java)
-            startActivity(intent)
+            navigateToNotificationActivity()
+        }
+        binding.monitoring.setOnClickListener {
+            navigateToDeviceActivity()
         }
 
         // Dummy data
@@ -62,6 +65,14 @@ class TestFragment : Fragment() {
         binding.testRecyclerView.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
 
     }
+    private fun navigateToDeviceActivity() {
+        val intent = Intent(requireContext(), DeviceInfoScreenActivity::class.java)
+        startActivity(intent)
+    }
 
+    private fun navigateToNotificationActivity() {
+        val intent = Intent(requireContext(), NotificationActivity::class.java)
+        startActivity(intent)
+    }
 
 }

@@ -26,7 +26,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Docbot"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.RegistrationScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OtpVerifyScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FaqActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MyAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AuthenticateScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DeviceInfoScreenActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.HeightMeasureResultActivity"
             android:exported="false" />
