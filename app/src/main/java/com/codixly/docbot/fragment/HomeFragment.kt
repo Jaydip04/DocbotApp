@@ -67,6 +67,10 @@ class HomeFragment : Fragment() {
             navigateToProfileScreen()
         }
 
+//        binding.profileImage.setOnClickListener {
+//            navigateToProfileScreen()
+//        }
+
         binding.notification.setOnClickListener {
             navigateToNotificationActivity()
         }
