@@ -28,7 +28,7 @@ class RegistrationScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
+//ok?
         binding = ActivityRegistrationScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
