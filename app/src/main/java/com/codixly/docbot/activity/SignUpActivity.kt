@@ -182,7 +182,6 @@ class SignUpActivity : AppCompatActivity() {
                                     putString("machine_id", res.customer?.machine_id)
                                     putString("inserted_date", res.customer?.inserted_date)
                                     putString("inserted_time", res.customer?.inserted_time)
-
                                     putString("bluetooth_id", res.machineData?.blutooth_id)
                                     putString("machine_unique_id", res.machineData?.machine_unique_id)
                                     apply()

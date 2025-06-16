@@ -9,6 +9,8 @@ import com.codixly.docbot.model.LoginRequest
 import com.codixly.docbot.model.LoginResponse
 import com.codixly.docbot.model.LogoutRequest
 import com.codixly.docbot.model.LogoutResponse
+import com.codixly.docbot.model.PatientRegistrationRequest
+import com.codixly.docbot.model.PatientRegistrationResponse
 import com.codixly.docbot.model.SendOtpRequest
 import com.codixly.docbot.model.SendOtpResponse
 import com.codixly.docbot.model.VerifyKeyRequest
@@ -60,5 +62,8 @@ interface ApiService {
 
     @POST("verify_otp")
     fun verifyOtp(@Body request: VerifyOtpRequest): Call<VerifyOtpResponse>
+
+    @POST("register_paitent")
+    fun registerPatient(@Body request: PatientRegistrationRequest): Call<PatientRegistrationResponse>
 
 }
