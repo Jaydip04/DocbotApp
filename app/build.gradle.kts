@@ -5,12 +5,12 @@ plugins {
 
 android {
     signingConfigs {
-//        getByName("debug") {
-//            storeFile = file("C:\\Users\\Dell\\Docbot\\app\\keystore.jks")
-//            storePassword = "android"
-//            keyPassword = "android"
-//            keyAlias = "key0"
-//        }
+        getByName("debug") {
+            storeFile = file("C:\\Users\\Dell\\Docbot\\app\\keystore.jks")
+            storePassword = "android"
+            keyPassword = "android"
+            keyAlias = "key0"
+        }
     }
     namespace = "com.codixly.docbot"
     compileSdk = 35
@@ -114,5 +114,6 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+    implementation ("com.hbb20:ccp:2.5.3")
 
 }
