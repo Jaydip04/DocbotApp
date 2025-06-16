@@ -5,12 +5,12 @@ plugins {
 
 android {
     signingConfigs {
-        getByName("debug") {
-            storeFile = file("C:\\Users\\Dell\\Docbot\\app\\keystore.jks")
-            storePassword = "android"
-            keyPassword = "android"
-            keyAlias = "key0"
-        }
+//        getByName("debug") {
+//            storeFile = file("C:\\Users\\Dell\\Docbot\\app\\keystore.jks")
+//            storePassword = "android"
+//            keyPassword = "android"
+//            keyAlias = "key0"
+//        }
     }
     namespace = "com.codixly.docbot"
     compileSdk = 35
