@@ -45,5 +45,7 @@
     <color name="profile_color">#05B4AC</color>
     <color name="colorSurfaceVariant">#E3F2FD</color>
     <color name="dark_gray">#666666</color>
+    <color name="teal_200">#03DAC5</color>
+
 
 </resources>
