@@ -251,7 +251,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
-            android:id="@+id/btn_sign_up_text"
+            android:id="@+id/btn_registration_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"

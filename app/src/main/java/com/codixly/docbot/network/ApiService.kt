@@ -1,10 +1,15 @@
 package com.codixly.docbot.network
 
+import GenericResponse
+import MachineTestStatusRequest
+import SaveDeviceDetailsRequest
 import com.codixly.docbot.model.CustomerDataRequest
 import com.codixly.docbot.model.CustomerDataResponse
 import com.codixly.docbot.model.DeleteAccountRequest
 import com.codixly.docbot.model.DeleteAccountResponse
 import com.codixly.docbot.model.FaqResponse
+import com.codixly.docbot.model.GetPatientTestDetailsRequest
+import com.codixly.docbot.model.GetPatientTestDetailsResponse
 import com.codixly.docbot.model.LoginRequest
 import com.codixly.docbot.model.LoginResponse
 import com.codixly.docbot.model.LogoutRequest
@@ -65,5 +70,18 @@ interface ApiService {
 
     @POST("register_paitent")
     fun registerPatient(@Body request: PatientRegistrationRequest): Call<PatientRegistrationResponse>
+
+    @POST("save_deviceDetails")
+    fun saveDeviceDetails(
+        @Body request: SaveDeviceDetailsRequest
+    ): Call<GenericResponse>
+
+    @POST("machine_test_status")
+    fun sendMachineTestStatus(
+        @Body request: MachineTestStatusRequest
+    ): Call<GenericResponse>
+
+    @POST("get_patient_Testdetails")
+    fun getPatientTestDetails(@Body request: GetPatientTestDetailsRequest): Call<GetPatientTestDetailsResponse>
 
 }

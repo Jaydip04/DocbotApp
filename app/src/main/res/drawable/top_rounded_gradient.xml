@@ -4,9 +4,10 @@
 
     <!-- Gradient from top to bottom -->
     <gradient
-        android:startColor="#5ED2D2"
-        android:endColor="#5ED2B7"
-        android:angle="270" /> <!-- 270 = top to bottom -->
+        android:startColor="#2105B4AC"
+        android:endColor="#2105B4AC"
+        android:angle="270" />
+
 
     <!-- Only top corners rounded -->
     <corners

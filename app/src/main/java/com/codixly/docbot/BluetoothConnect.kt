@@ -483,6 +483,9 @@
 
 package com.codixly.docbot
 
+import GenericResponse
+import MachineTestStatusRequest
+import SaveDeviceDetailsRequest
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -1102,22 +1105,123 @@ class BluetoothConnect: AppCompatActivity(),
         // For example, navigate to a results activity or show a dialog
     }
 
+//        override fun onHCDeviceInfo(hcDeviceData: HCDeviceData) {
+//            runOnUiThread {
+//                val serialNumber = hcDeviceData.serialNumber ?: "Unknown"
+//                val firmwareVersion = hcDeviceData.firmwareVersion ?: "Unknown"
+//
+//                // Show device connected message with serial number
+//                val connectionMessage = "Device Connected!\nSerial: $serialNumber"
+//                Toast.makeText(this, connectionMessage, Toast.LENGTH_LONG).show()
+//
+//                // Update status text with slow animation effect
+//                showSlowConnectionStatus(serialNumber, firmwareVersion)
+//
+//                // Navigate to device details after delay
+//                handler.postDelayed({
+//                    navigateToDeviceDetails(hcDeviceData)
+//                }, NAVIGATION_DELAY_MS)
+//            }
+//        }
+
     override fun onHCDeviceInfo(hcDeviceData: HCDeviceData) {
         runOnUiThread {
             val serialNumber = hcDeviceData.serialNumber ?: "Unknown"
             val firmwareVersion = hcDeviceData.firmwareVersion ?: "Unknown"
 
-            // Show device connected message with serial number
             val connectionMessage = "Device Connected!\nSerial: $serialNumber"
-            Toast.makeText(this, connectionMessage, Toast.LENGTH_LONG).show()
+//            Toast.makeText(this, connectionMessage, Toast.LENGTH_LONG).show()
 
-            // Update status text with slow animation effect
             showSlowConnectionStatus(serialNumber, firmwareVersion)
 
-            // Navigate to device details after delay
+            // Start both API calls after device is connected
+            callSaveDeviceDetailsAPI(serialNumber, firmwareVersion)
+            callMachineTestStatusAPI(hcDeviceData)
+
             handler.postDelayed({
                 navigateToDeviceDetails(hcDeviceData)
             }, NAVIGATION_DELAY_MS)
+        }
+    }
+
+    private fun callMachineTestStatusAPI(hcDeviceData: HCDeviceData) {
+        val sharedPref = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val customerId = sharedPref.getString("customer_unique_id", null)
+
+        if (!customerId.isNullOrEmpty()) {
+            val request = MachineTestStatusRequest(
+                customer_unique_id = customerId,
+                bloodPressureModule = if (hcDeviceData.bloodPressureModule?.toString()?.equals("ACTIVE", ignoreCase = true) == true) "1" else "0",
+                cholesterolUricAcidModule = if (hcDeviceData.cholestrolUricAcidModule?.toString()?.equals("ACTIVE", ignoreCase = true) == true) "1" else "0",
+                glucometerModule = if (hcDeviceData.glucometerModule?.toString()?.equals("ACTIVE", ignoreCase = true) == true) "1" else "0",
+                hemoglobinModule = if (hcDeviceData.hemoglobinModule?.toString()?.equals("ACTIVE", ignoreCase = true) == true) "1" else "0",
+                pulseOximetryModule = if (hcDeviceData.pulseOximetryModule?.toString()?.equals("ACTIVE", ignoreCase = true) == true) "1" else "0",
+                rdtModule = if (hcDeviceData.rdtModule?.toString()?.equals("ACTIVE", ignoreCase = true) == true) "1" else "0",
+                ecgModule = if (hcDeviceData.ecgModule?.toString()?.equals("ACTIVE", ignoreCase = true) == true) "1" else "0"
+            )
+
+            ApiClient.instance.sendMachineTestStatus(request).enqueue(object : Callback<GenericResponse> {
+                override fun onResponse(call: Call<GenericResponse>, response: Response<GenericResponse>) {
+                    if (response.isSuccessful && response.body()?.status == true) {
+                        val resultMessage = response.body()?.message ?: "Test status updated successfully"
+                        Toast.makeText(this@BluetoothConnect, resultMessage, Toast.LENGTH_SHORT).show()
+                        Log.d("MachineTestStatus", resultMessage)
+                    } else {
+                        val errorMessage = response.body()?.message ?: "Failed to update test status"
+                        Toast.makeText(this@BluetoothConnect, errorMessage, Toast.LENGTH_SHORT).show()
+                        Log.e("MachineTestStatus", errorMessage)
+                    }
+                }
+
+
+                override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                    Log.e("MachineTestStatus", "API call failed: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("MachineTestStatus", "Customer ID not found")
+        }
+    }
+
+
+    private fun callSaveDeviceDetailsAPI(serialNumber: String, firmwareVersion: String) {
+        val sharedPref = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val customerId = sharedPref.getString("customer_unique_id", null)
+
+        if (!customerId.isNullOrEmpty()) {
+            val request = SaveDeviceDetailsRequest(
+                customer_unique_id = customerId,
+                serial_number = serialNumber,
+                firmware_version = firmwareVersion
+            )
+
+            ApiClient.instance.saveDeviceDetails(request).enqueue(object : Callback<GenericResponse> {
+                override fun onResponse(call: Call<GenericResponse>, response: Response<GenericResponse>) {
+                    if (response.isSuccessful) {
+                        val body = response.body()
+                        if (body?.status == true) {
+                            val successMessage = body.message ?: "Device details saved successfully"
+                            Log.d("DeviceDetails", successMessage)
+                            Toast.makeText(this@BluetoothConnect, successMessage, Toast.LENGTH_SHORT).show()
+                        } else {
+                            val failureMessage = body?.message ?: "Failed to save device details"
+                            Log.e("DeviceDetails", failureMessage)
+                            Toast.makeText(this@BluetoothConnect, failureMessage, Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        Log.e("DeviceDetails", "HTTP error: ${response.code()} - $errorBody")
+                        Toast.makeText(this@BluetoothConnect, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+
+                override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                    Log.e("DeviceDetails", "API call failed: ${t.message}")
+                }
+            })
+        } else {
+            Log.e("DeviceDetails", "Customer ID not found")
         }
     }
 
