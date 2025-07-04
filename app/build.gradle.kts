@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+<<<<<<< HEAD
     signingConfigs {
         getByName("debug") {
             storeFile = file("C:\\Users\\Dell\\Docbot\\app\\keystore.jks")
@@ -12,6 +13,8 @@ android {
             keyAlias = "key0"
         }
     }
+=======
+>>>>>>> 3da73ca (push the code)
     namespace = "com.codixly.docbot"
     compileSdk = 35
 
@@ -55,7 +58,10 @@ android {
         viewBinding = true
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3da73ca (push the code)
     packaging {
         resources {
             pickFirsts += setOf("META-INF/INDEX.LIST")
@@ -96,6 +102,7 @@ dependencies {
     implementation("com.google.android.material:material:1.6.0")
     implementation("org.apache.commons:commons-compress:1.16.1")
     implementation("com.itextpdf:itextpdf:5.5.4")
+<<<<<<< HEAD
     implementation("com.google.code.findbugs:jsr305:3.0.2")
     implementation("com.google.errorprone:error_prone_annotations:2.3.4")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
@@ -115,5 +122,13 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
     implementation ("com.hbb20:ccp:2.5.3")
+=======
+
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
+    implementation("com.google.errorprone:error_prone_annotations:2.3.4")
+    implementation("javax.annotation:javax.annotation-api:1.3.2")
+
+    implementation("com.google.auto.value:auto-value-annotations:1.9")
+>>>>>>> 3da73ca (push the code)
 
 }
