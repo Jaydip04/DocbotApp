@@ -595,7 +595,7 @@ class OtpVerifyScreenActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<SendOtpResponse>, t: Throwable) {
-                Toast.makeText(this@OtpVerifyScreenActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@OtpVerifyScreenActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -638,16 +638,72 @@ class OtpVerifyScreenActivity : AppCompatActivity() {
 
         val request = VerifyOtpRequest(mobile, otp, existingPatient, customerID)
 
+//        ApiClient.instance.verifyOtp(request).enqueue(object : Callback<VerifyOtpResponse> {
+//            override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>) {
+//                showProgress(false)
+//                if (response.isSuccessful && response.body()?.status == true) {
+//                    Log.d("OTP_VERIFY", response.body()?.status .toString())
+//                    Log.d("OTP_VERIFY", response.body()?.message .toString())
+//                    if (existingPatient) {
+//                        showSuccessDialog {
+//                            startActivity(Intent(this@OtpVerifyScreenActivity, PatientProfileActivity::class.java))
+////                            val intent = Intent(this@OtpVerifyScreenActivity, RegistrationScreenActivity::class.java)
+////                            intent.putExtra("mobile", mobile)
+////                            startActivity(intent)
+//                            finish()
+//                        }
+//                    } else {
+//                        showSuccessDialog {
+//                            val intent = Intent(this@OtpVerifyScreenActivity, RegistrationScreenActivity::class.java)
+//                            intent.putExtra("mobile", mobile)
+//                            startActivity(intent)
+//                            finish()
+//                        }
+//                    }
+//                } else {
+//                    Toast.makeText(this@OtpVerifyScreenActivity, "OTP verification failed", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<VerifyOtpResponse>, t: Throwable) {
+//                showProgress(false)
+//                Toast.makeText(this@OtpVerifyScreenActivity, "Network Error: ${t.message}", Toast.LENGTH_SHORT).show()
+//            }
+//        })
         ApiClient.instance.verifyOtp(request).enqueue(object : Callback<VerifyOtpResponse> {
             override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>) {
                 showProgress(false)
                 if (response.isSuccessful && response.body()?.status == true) {
+                    val body = response.body()
+                    Log.d("OTP_VERIFY", body?.status.toString())
+                    Log.d("OTP_VERIFY", body?.message.toString())
+
+                    // ✅ If existing patient, save data to SharedPreferences
                     if (existingPatient) {
+                        body?.paitent?.let { patient ->
+                            val sharedPref = getSharedPreferences("paitent_data", MODE_PRIVATE)
+                            with(sharedPref.edit()) {
+                                putString("paitent_id", patient.paitent_id.toString())
+                                putString("paitent_unique_id", patient.paitent_unique_id)
+                                putString("paitent_name", patient.paitent_name)
+                                putString("paitent_email", patient.paitent_email)
+                                putString("paitent_mobile", patient.paitent_mobile)
+                                putString("gender", patient.gender)
+                                putString("dob", patient.dob)
+                                putString("age", patient.age)
+                                putString("address", patient.address)
+                                putString("token", patient.token)
+                                apply()
+                            }
+
+                            Log.d("paitent_id", "${sharedPref.getString("paitent_id", "")}")
+                            Log.d("token", "${sharedPref.getString("token", "")}")
+                            Log.d("paitent_unique_id", "${sharedPref.getString("paitent_unique_id", "")}")
+                            Log.d("OTP_VERIFY", "Patient data saved to SharedPreferences")
+                        }
+
                         showSuccessDialog {
-//                            startActivity(Intent(this@OtpVerifyScreenActivity, MainActivity::class.java))
-                            val intent = Intent(this@OtpVerifyScreenActivity, RegistrationScreenActivity::class.java)
-                            intent.putExtra("mobile", mobile)
-                            startActivity(intent)
+                            startActivity(Intent(this@OtpVerifyScreenActivity, PatientProfileActivity::class.java))
                             finish()
                         }
                     } else {
@@ -668,6 +724,7 @@ class OtpVerifyScreenActivity : AppCompatActivity() {
                 Toast.makeText(this@OtpVerifyScreenActivity, "Network Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+
     }
 
     private fun showProgress(show: Boolean) {
