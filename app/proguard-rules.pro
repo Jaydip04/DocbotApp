@@ -64,3 +64,8 @@
 # Keep ErrorProne Annotations
 -keep class javax.lang.model.** { *; }
 -keep class com.google.errorprone.annotations.** { *; }
+
+-keep class com.codixly.model.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*
+

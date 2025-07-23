@@ -159,8 +159,8 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun navigateToBluetoothScreen() {
         Handler(Looper.getMainLooper()).postDelayed({
-//            startActivity(Intent(this, BluetoothScanScreenActivity::class.java))
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, BluetoothScanScreenActivity::class.java))
+//            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, 3000)
     }
