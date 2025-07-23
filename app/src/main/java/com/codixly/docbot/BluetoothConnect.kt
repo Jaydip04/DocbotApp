@@ -509,6 +509,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.codixly.docbot.activity.DeviceAddedSuccessfullyActivity
 import com.codixly.docbot.adapter.BluetoothDeviceAdapter
 import com.codixly.docbot.model.VerifyKeyRequest
 import com.codixly.docbot.model.VerifyKeyResponse
@@ -1254,8 +1255,8 @@ class BluetoothConnect: AppCompatActivity(),
         try {
             // Show final status before navigation
             statusTextView.text = "Opening device details..."
-
-            val intent = Intent(this, DeviceDetailsActivity::class.java).apply {
+//            val intent = Intent(this@BluetoothScanScreenActivity, DeviceAddedSuccessfullyActivity::class.java)
+            val intent = Intent(this, DeviceAddedSuccessfullyActivity::class.java).apply {
                 putExtra("serial_number", hcDeviceData.serialNumber)
                 putExtra("firmware_version", hcDeviceData.firmwareVersion)
                 putExtra("blood_pressure_module", hcDeviceData.bloodPressureModule?.toString())

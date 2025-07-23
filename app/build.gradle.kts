@@ -28,8 +28,8 @@ android {
     buildTypes {
         release {
             isDebuggable = false
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             isDebuggable = false
             isJniDebuggable = false
             proguardFiles(
@@ -103,6 +103,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.github.elinkthings:AILinkSDKRepositoryAndroid:1.10.9")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 //    implementation ("com.github.elinkthings:AILinkSDKRepositoryAndroid:1.10.9")
     implementation ("com.github.elinkthings:AILinkSDKParsingLibraryAndroid:1.9.8")
     implementation ("com.google.android.material:material:1.11.0")

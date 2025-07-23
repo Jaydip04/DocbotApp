@@ -72,7 +72,6 @@
         <PersistentDeviceSelectionData>
           <option name="api" value="34" />
           <option name="brand" value="samsung" />
-<<<<<<< HEAD
           <option name="codename" value="a14m" />
           <option name="id" value="a14m" />
           <option name="manufacturer" value="Samsung" />
@@ -84,8 +83,6 @@
         <PersistentDeviceSelectionData>
           <option name="api" value="34" />
           <option name="brand" value="samsung" />
-=======
->>>>>>> 3da73ca (push the code)
           <option name="codename" value="a15" />
           <option name="id" value="a15" />
           <option name="manufacturer" value="Samsung" />
@@ -128,21 +125,18 @@
           <option name="screenY" value="2340" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
-<<<<<<< HEAD
-=======
-          <option name="api" value="31" />
-          <option name="brand" value="samsung" />
-          <option name="codename" value="a51" />
-          <option name="id" value="a51" />
-          <option name="manufacturer" value="Samsung" />
-          <option name="name" value="Galaxy A51" />
+          <option name="api" value="34" />
+          <option name="brand" value="google" />
+          <option name="codename" value="akita" />
+          <option name="id" value="akita" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 8a" />
           <option name="screenDensity" value="420" />
           <option name="screenX" value="1080" />
           <option name="screenY" value="2400" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
->>>>>>> 3da73ca (push the code)
-          <option name="api" value="34" />
+          <option name="api" value="35" />
           <option name="brand" value="google" />
           <option name="codename" value="akita" />
           <option name="id" value="akita" />
@@ -329,7 +323,6 @@
           <option name="screenY" value="384" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
-<<<<<<< HEAD
           <option name="api" value="35" />
           <option name="brand" value="motorola" />
           <option name="codename" value="eqe" />
@@ -341,8 +334,6 @@
           <option name="screenY" value="2712" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
-=======
->>>>>>> 3da73ca (push the code)
           <option name="api" value="33" />
           <option name="brand" value="google" />
           <option name="codename" value="felix" />
@@ -388,7 +379,6 @@
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
           <option name="api" value="34" />
-<<<<<<< HEAD
           <option name="brand" value="motorola" />
           <option name="codename" value="fogos" />
           <option name="id" value="fogos" />
@@ -400,8 +390,6 @@
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
           <option name="api" value="34" />
-=======
->>>>>>> 3da73ca (push the code)
           <option name="brand" value="samsung" />
           <option name="codename" value="g0q" />
           <option name="id" value="g0q" />
@@ -423,7 +411,6 @@
           <option name="screenY" value="1920" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
-<<<<<<< HEAD
           <option name="api" value="33" />
           <option name="brand" value="samsung" />
           <option name="codename" value="gts7lwifi" />
@@ -435,8 +422,6 @@
           <option name="screenY" value="2560" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
-=======
->>>>>>> 3da73ca (push the code)
           <option name="api" value="34" />
           <option name="brand" value="samsung" />
           <option name="codename" value="gts7xllite" />
@@ -536,6 +521,17 @@
           <option name="screenY" value="2244" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="motorola" />
+          <option name="codename" value="lion" />
+          <option name="id" value="lion" />
+          <option name="manufacturer" value="Motorola" />
+          <option name="name" value="moto g04" />
+          <option name="screenDensity" value="280" />
+          <option name="screenX" value="720" />
+          <option name="screenY" value="1612" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
           <option name="api" value="33" />
           <option name="brand" value="google" />
           <option name="codename" value="lynx" />
@@ -547,7 +543,6 @@
           <option name="screenY" value="2400" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
-<<<<<<< HEAD
           <option name="api" value="34" />
           <option name="brand" value="motorola" />
           <option name="codename" value="lyriq" />
@@ -570,8 +565,6 @@
           <option name="screenY" value="2400" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
-=======
->>>>>>> 3da73ca (push the code)
           <option name="api" value="33" />
           <option name="brand" value="motorola" />
           <option name="codename" value="maui" />

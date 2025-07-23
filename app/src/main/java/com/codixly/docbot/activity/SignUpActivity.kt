@@ -199,16 +199,16 @@ class SignUpActivity : AppCompatActivity() {
 //                                    apply()
 //                                }
 
-//                                val intent =
-//                                    Intent(
-//                                        this@SignUpActivity,
-//                                        BluetoothScanScreenActivity::class.java
-//                                    )
                                 val intent =
                                     Intent(
                                         this@SignUpActivity,
-                                        MainActivity::class.java
+                                        BluetoothScanScreenActivity::class.java
                                     )
+//                                val intent =
+//                                    Intent(
+//                                        this@SignUpActivity,
+//                                        MainActivity::class.java
+//                                    )
                                 startActivity(intent)
                                 finish()
                             } else {
